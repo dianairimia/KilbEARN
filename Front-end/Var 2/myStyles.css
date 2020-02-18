@@ -1,0 +1,41 @@
+header {
+  height:80px;
+  background-color:#9DC183;
+  color:white;
+  text-align: center;
+}
+h1 {
+  color:white;
+}
+/* nav {
+  height: 50px;
+  background-color: rgb(229,184,183);
+  text-align: center;
+  border-top: solid white;
+  line-height: 50px;
+  }
+aside {
+  width: 150px;
+  background-color: rgb(229,184,183);
+  border-top: solid white;
+  border-right: solid white;
+  text-align: center;
+  line-height: 50px;
+  height: 300px;
+  float: left;
+}
+main {
+  background-color: #F2DBDB;
+  border-top-style: solid;
+  border-top-color: white;
+  height: 300px;
+  border-left: 3px;
+  border-left-color: white;
+}
+footer {
+  height: 100px;
+  background-color:#C0504D;
+  border-top: solid white;
+  text-align: center;
+  line-height: 50px;
+} */
