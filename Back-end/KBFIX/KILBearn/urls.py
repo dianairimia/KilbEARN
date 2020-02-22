@@ -6,7 +6,7 @@ from DBapp import views
 urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^DB/', include('DBapp.urls')),
-    url(r'^Login', views.LoginPage, name='index'),
+    url(r'^login', views.LoginPage, name='index'),
     url(r'^computer', views.computer, name='index'),
     url(r'^instructions', views.instructions, name='index'),
     url(r'^noroom', views.noroom, name='index'),
