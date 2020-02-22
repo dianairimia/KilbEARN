@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^register', views.register, name='index'),
     url(r'^settings', views.settings, name='index'),
     url(r'^welcome', views.welcome, name='index'),
+    url(r'^mainmenu', views.mainmenu, name='index'),
     url(r'admin/', admin.site.urls),
 ]

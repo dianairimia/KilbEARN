@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from DBapp.models import Main, Friends
 from django import forms
+from . import forms
 
 
 def index(request):
@@ -14,8 +15,7 @@ def computer(request):
     return render(request, 'DBapp/computer.html', context=val_dict)
 
 def LoginPage(request):
-    #form=forms.FormName()
-    form=3
+    form=forms.Login()
     return render(request, 'DBapp/login.html', {'forms':form})
 
 def instructions(request):
@@ -25,7 +25,7 @@ def instructions(request):
 def mainmenu(request):
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/mainmenu.html', context=val_dict)
-    
+
 def noroom(request):
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/noroom.html', context=val_dict)
