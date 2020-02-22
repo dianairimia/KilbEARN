@@ -22,6 +22,10 @@ def instructions(request):
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/instructions.html', context=val_dict)
 
+def mainmenu(request):
+    val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
+    return render(request, 'DBapp/mainmenu.html', context=val_dict)
+    
 def noroom(request):
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/noroom.html', context=val_dict)

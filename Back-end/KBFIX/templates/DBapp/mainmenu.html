@@ -1,5 +1,5 @@
 <!doctype html>
-{% load staticfiles %}
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Settings</title>
+    <title>Main Menu</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -21,12 +21,11 @@
 
   <body class="text-center">
     <form class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">SETTINGS</h1>
-      <a class="btn btn-primary btn-lg btn-block" href=".html" role="button">Number of Dice</a>
-      <a class="btn btn-primary btn-lg btn-block" href=".html" role="button">Sound</a>
-      <a class="btn btn-primary btn-lg btn-block" href=".html" role="button">Animations</a>
-      <button type="button" class="btn btn-primary btn-sm btn-block" onclick="javascript:history.back()">Back</button>
-      </form>
+      <h1 class="h3 mb-3 font-weight-normal">MAIN MENU</h1>
+        <a class="btn btn-primary btn-lg btn-block" href="profile.html" role="button">Profile</a>
+        <a class="btn btn-primary btn-lg btn-block" href="play.html" role="button">Play</a>
+        <a class="btn btn-primary btn-lg btn-block" href="settings.html" role="button">Settings</a>
+        <a class="btn btn-primary btn-lg btn-block" href="instructions.html" role="button">Instructions</a>
     </form>
   </body>
 </html>
