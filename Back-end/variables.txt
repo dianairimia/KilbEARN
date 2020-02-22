@@ -1,0 +1,11 @@
+### Variable names and what they store
+houses_location[i] = amount of houses on the location indexed with i
+hotels_location[i] = amount of hotels on the location indexed with i
+player_money[i] = how much money the player indexed with i has
+location[i] = frequency array that stores 1 if a location is owned by anyone and 0 if it is not
+location_price[i] = the price of the location indexed with i
+no_remaining_players = the number of players that are still in the game
+no_players = the number of players in the beginning
+player_location[i] = the location of the player indexed with i
+location[i] == -1 deadlines
+location[i] == -2  mitigating_circumstances
