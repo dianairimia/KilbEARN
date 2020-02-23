@@ -20,20 +20,69 @@
   </head>
 
   <body class="text-center">
-    <form class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">Select the number of players</h1>
+  <form class="form-signin">
 
-      <div class="button-box col-lg-12">
-        <a class="btn btn-primary btn-sm btn-info" href="profile.html" role="button">Profile</a>
-        <a class="btn btn-primary btn-sm btn-info" href="settings.html" role="button">Settings</a>
+    <div class="container">
+      <div class="row top-buffer">
+        <div class="col">
+        <a class="btn btn-primary btn-sm" href="profile.html" role="button">Profile</a>
+        </div>
+        <div class="col-6">
+        <a class="btn btn-primary btn-sm" href="settings.html" role="button">Settings</a>
+        </div>
       </div>
+    </div>
+    <br>
 
-      <a class="btn btn-primary btn-lg btn-block" href=".html" role="button">1</a>
-      <a class="btn btn-primary btn-lg btn-block" href=".html" role="button">2</a>
-      <a class="btn btn-primary btn-lg btn-block" href=".html" role="button">3</a>
+  <h1 class="h3 mb-3 font-weight-normal">Add Players</h1>
+  <label for="inputName" class="sr-only"></label>
+  <input type="name" id="inputName" class="form-control"
+  placeholder="Name" required autofocus>
+  <br>
+  <h3 class="h3 mb-3 font-weight-normal">Select Your Colour</h3>
+  <div class="container">
+    <div class="row top-buffer">
+      <div class="col-2">
+      <a class="btn btn-primary btn-lg btn-group btn-pink" href="#.html" role="button"></a>
+      </div>
+      <div class="col-2">
+      <a class="btn btn-primary btn-lg btn-group btn-orange" href="#.html" role="button"></a>
+      </div>
+      <div class="col-2">
+      <a class="btn btn-primary btn-lg btn-group btn-blue" href="#.html" role="button"></a>
+      </div>
+      <div class="col-2">
+      <a class="btn btn-primary btn-lg btn-group btn-green" href="#.html" role="button"></a>
+      </div>
+      <div class="col-2">
+      <a class="btn btn-primary btn-lg btn-group btn-red" href="#.html" role="button"></a>
+      </div>
+      <div class="col-2">
+      <a class="btn btn-primary btn-lg btn-group btn-red" href="#.html" role="button"></a>
+      </div>
+    </div>
+    <br>
 
+    <h3 class="h3 mb-3 font-weight-normal">Select Your Icon</h3>
+
+    <div class="row top-buffer">
+        <a class="btn btn-primary btn-lg btn-block" href="#.html" role="button">Save Player</a>
+    </div>
+
+    <div class="row top-buffer">
+      <div class="col">
+      <a class="btn btn-primary btn-sm btn-block" href="#.html" role="button">Add Player</a>
+      </div>
+      <div class="col">
+      <a class="btn btn-primary btn-sm btn-block" href="board.html" role="button">SAVE & PLAY</a>
+      </div>
+    </div>
+
+    <div class="row top-buffer">
       <button type="button" class="btn btn-primary btn-sm btn-block" onclick="javascript:history.back()">Back</button>
-      </form>
-    </form>
-  </body>
+    </div>
+
+  </div>
+  </form>
+</body>
 </html>
