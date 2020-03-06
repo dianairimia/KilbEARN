@@ -1,8 +1,8 @@
 def mitigating_circumstances(player):
-    m = random.randint(1,11);
+    m = random.randint(1,11)
     if m == 1:    # Advance to "Startx". (Collect K 200)
-        player_location[player] == 0;
-        player_money[player] += 200;
+        player_location[player] == 0
+        player_money[player] += 200
 
     if m==2: # Advance to "Byte Cafe" and relax. If you pass through the Startx, collect k 200. If owned, you do not need to pay, if unowned, you can buy it from the Bank.
         if(player_location[player]>27):
