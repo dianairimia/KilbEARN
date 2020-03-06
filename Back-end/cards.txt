@@ -1,0 +1,45 @@
+mitigating_circumstances
+m1:
+  Advance to "Startx". (Collect K 200)
+m2:
+  Advance to "Byte Cafe" and relax. If you pass through the Startx, collect k 200. If owned, you do not need to pay, if unowned, you can buy it from the Bank.
+m3:
+  You have been elected the chair of the tutorials for the rest of the semester. Collect k 25 from each player.
+m4:
+  Go directly to the tutor's room. If you pass through Startx do not collect K 200.
+m5:
+  Advance token to nearest the server2. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 10 times the amount thrown.
+m6:
+  Congratulations! You won a hackathon. Collect k 100.
+m7:
+  Get out of the tutor's room.
+m8:
+  Ah for crying out loud. You got to an infinite loop and do not know how to solve it. Ask for help and pay k 50.
+m9:
+  Unfortunately, you were not able to sit the exams. Go to Startx. Do not collect k200.
+m10:
+  Advance to the Lecture Theatre 1.2. If you pass through Startx do not collect k200. If owned, you do not have to pay the rent. If unowned, you may buy it from the Bank.
+
+
+
+deadlines
+d1:
+  You missed a deadline. Pay k 50.
+d2:
+  You need to add optimisation to your code. Pay k 75.
+d3:
+  You are behind with your work. Go to the tutor's room and ask for help. If you pass through Startx do collect k 200.
+d4:
+  Your new coursework is raising your concerns. You do not know if you will finish it on time. Go to Tooltil O and work. If you pass through Startx collect k200. If owned pay the rent, if unowned you can buy it.
+d5:
+  Midterms are rapidly approaching and you should focus on your work. Collect k 100 that would help you throughout this time.
+d6:
+  You have finished your work on time. You deserve a treat. Collect k 50.
+d7:
+  You need to finish your work on time. Go to LF 31. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 5 times the amount thrown.  If you pass through Startx collect k 200.
+d8:
+  You need to give your final presentation. Pay each player k 25.
+d9:
+  Demo presentation before holiday. Pay k75.
+d10:
+  Final report deadline. Go to the Quiet Room and finish your report. If owned, pay 2 times the rent. If unowned, you may buy it. If you pass through Startx collect k200.
