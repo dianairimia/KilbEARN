@@ -58,6 +58,14 @@ def pay(player, amount, optionality):
             skip[player] = 2
             no_remaining_player = no_remaining_player - 1
 
+            #if a player loses, he loses all his locations and houses and hotels
+
+            for i in range(40):
+                if location[i] == player + 1:
+                    hotels_location[i] = 0
+                    houses_location[i] = 0
+                    location[i] = 0
+
 
 
         #we ask the player what he wants to sell
@@ -114,7 +122,7 @@ def check_ownable_locations(checked_location, player):
 
 
     #global variables
-    global location, player_money, location_price, server_counter
+    global location, player_money, location_price, server_counter, hotels_location, houses_location, utilities_counter, dice_value
 
 
 
@@ -125,13 +133,27 @@ def check_ownable_locations(checked_location, player):
         #this means that the location is owned by somebody else
         if location[checked_location] != player + 1 and location[checked_location] <= 6:
             # player pays the rent
+            if hotels_location[checked_location] == 1:
+                rent = 5 * location_price[checked_location]
+            elif houses_location[checked_location] == 4:
+                rent = 4 * location_price[checked_location]
+            elif houses_location[checked_location] == 3:
+                rent = 7 * location_price[checked_location]
+                rent = rent / 2
+            elif houses_location[checked_location] == 2:
+                rent = 3 * location_price[checked_location]
+                rent = rent / 2
+            elif houses_location[checked_location] == 1:
+                rent = location_price[checked_location] / 4
+            elif houses_location[checked_location] == 0:
+                rent = location_price[checked_location] / 10
             check_pay = player_money[player]
-            pay(player, location_price[checked_location], 0)
+            pay(player, rent, 0)
             if (check_pay > player_money[player]):
                 player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + location_price[checked_location]
             else:
                 player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + check_pay
-        elif location[checked_location] > 6 and location[checked_location] != player + 7:
+        elif location[checked_location] > 6 and location[checked_location] <= 12 and location[checked_location] != player + 7:
             #player pays depending on the number of owned servers by the owner
             check_pay = player_money[player]
             pay(player, 25 * (2**(server_counter[location[checked_location] - 7] - 1)), 0)
@@ -139,6 +161,20 @@ def check_ownable_locations(checked_location, player):
                 player_money[location[checked_location] - 7] = player_money[location[checked_location] - 7] + 25 * (2**(server_counter[location[checked_location] - 7] - 1))
             else:
                 player_money[location[checked_location] - 7] = player_money[location[checked_location] - 7] + check_pay
+        elif location[checked_location] > 12 and location[checked_location] != player + 13:
+            # player pays depending on the number of owned utilities by the owner
+            check_pay = player_money[player]
+            amout = 0
+            if utilities_counter[location[checked_location] - 13] == 1:
+                amount = 4 * dice_value
+                pay(player, 4 * dice_value, 0)
+            elif utilities_counter[location[checked_location] - 13] == 2:
+                amount = 10 * dice_value
+                pay(player, 10 * dice_value, 0)
+            if (check_pay > player_money[player]):
+                player_money[location[checked_location] - 13] = player_money[location[checked_location] - 13] + amount
+            else:
+                player_money[location[checked_location] - 13] = player_money[location[checked_location] - 13] + check_pay
 
 
 
@@ -154,6 +190,10 @@ def check_ownable_locations(checked_location, player):
                 if(checked_location == 5 or checked_location == 15 or checked_location == 25 or checked_location == 35):
                     server_counter[player] = server_counter[player] + 1
                     location[checked_location] = player + 7
+                #we check if it's a utility
+                elif(checked_location == 12 or checked_location == 28):
+                    utilities_counter[player] = utilities_counter[player] + 1
+                    location[checked_location] = player + 13
                 else:
                     location[checked_location] = player + 1
 
@@ -346,11 +386,12 @@ location = []                       #this list tells us what kind of location ea
                                     #        7-12 -> server, owned by player i-6
                                     #        -1 -> deadlines
                                     #        -2 -> mitigating circumstances
-                                    #        -3 -> pay stuff (vending machine, rent, tuition fees, microwave)
+                                    #        -3 -> pay stuff (rent, tuition fees)
                                     #        -4 -> tutor's room
                                     #        -5 -> eduroam
                                     #        -6 -> go to tutor's room
                                     #        -7 -> startx
+                                    #        13-18 -> utilities(vending machine, microwave)
 player_money = []                   #this list tells us the amount of money each player has
                                     #(indicies: 0-5 aka player number - 1)
 location_price = []                 #this list tells us what is the price of each location, or the price of a house if someone
@@ -374,8 +415,13 @@ player_escape = []                  #this list tells us if the player has an esc
 server_counter = []                 #this list tells us how many servers each player owns
                                     #(indicies: 0-5)
                                     #(values: 0-4 -> the number of servers owned by the player)
+utilities_counter = []              # this list tells us how many utilities each player owns
+                                    # (indicies: 0-5)
+                                    # (values: 0-2 -> the number of utilities owned by the player)
+
 eduroam_money = 0                   #this variable tells us how many money a player gets for when he lands on eduroam
 roll_counter = 0                    #this variable counts how many time a player rolled the dice
+dice_value = 0                      #this variable tells us how much a player rolled
 
 
 #MAIN program starts here
@@ -387,7 +433,7 @@ for i in range (40):
     hotels_location.append(0)
     #this is just a place holder for now...
     # we are going to introduce each locations price
-    location_price.append(150)
+    location_price.append(0)
     location.append(0)
 
 #we have to manually update each unownable location
@@ -396,15 +442,48 @@ location[2] = -2
 location[4] = -3
 location[7] = -1
 location[10] = -4
-location[12] = -3
 location[17] = -2
 location[20] = -5
 location[22] = -1
-location[28] = -3
 location[30] = -6
 location[33] = -2
 location[36] = -1
 location[38] = -3
+
+
+#we initialise all location_price
+location_price[1] = 60
+location_price[3] = 60
+location_price[4] = 200
+location_price[5] = 200
+location_price[6] = 100
+location_price[8] = 100
+location_price[9] = 120
+location_price[11] = 140
+location_price[12] = 150
+location_price[13] = 140
+location_price[14] = 160
+location_price[15] = 200
+location_price[16] = 180
+location_price[18] = 180
+location_price[19] = 200
+location_price[21] = 220
+location_price[23] = 220
+location_price[24] = 240
+location_price[25] = 200
+location_price[26] = 260
+location_price[27] = 260
+location_price[28] = 150
+location_price[29] = 260
+location_price[31] = 300
+location_price[32] = 300
+location_price[34] = 320
+location_price[35] = 200
+location_price[37] = 350
+location_price[38] = 100
+location_price[39] = 400
+
+
 
 
 #finding out the number of players
@@ -428,6 +507,7 @@ for i in range (no_players):
     player_escape.append(0)
     #each player starts with 0 servers
     server_counter.append(0)
+    utilities_counter.append(0)
 
 
 
