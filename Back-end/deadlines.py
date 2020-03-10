@@ -5,6 +5,7 @@ def deadlines(player):
     global hotels_location
     global houses_location
     global location_price
+    global check_pay
     d = random.randint(1,11)
     if d==1:   #You missed a deadline. Pay k 50.
         println("You missed a deadline. Pay k 50.")
@@ -44,7 +45,6 @@ def deadlines(player):
             x= random.randint(1,7)
             y = random.randint(1,7)
             println("You have thrown " + x + " "+ y)
-
             player_money[player] = player_money[player] -5*(x+y)
 
 
@@ -53,8 +53,14 @@ def deadlines(player):
     if d==8: #You need to give your final presentation. Pay each player k 25.
         println("You need to give your final presentation. Pay each player k 25.")
         for i in range(0, no_remaining_player):
-            player_money[player] -= 25
-            player_money[i] += 25
+            if player != i:
+                checked_pay = 1   # player didnt pay                     #globala pls
+                initial_money = player_money[player]
+                pay(player, 25, 0)
+                if check_pay == 0:
+                    player_money[i] += 25
+                else:
+                    player_money[i] += initial_money
 
 
     if d==9:#   Demo presentation before holiday. Pay k75.
