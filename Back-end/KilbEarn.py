@@ -10,13 +10,14 @@ def pay(player, amount, optionality):
 
 
     #global variables
-    global player_money, skip, hotels_location, houses_location, location, location_price, no_remaining_player
+    global player_money, skip, hotels_location, houses_location, location, location_price, no_remaining_player, paid_test
 
 
 
     #if the player has enough money, he pays
     if player_money[player] > amount:
         player_money[player] = player_money[player] - amount
+        paid_test = 0
 
 
     #check if the player HAS to pay
@@ -109,7 +110,157 @@ def pay(player, amount, optionality):
                         location[where] = 0
 
             #now that the player has money after selling stuff he can pay what he has to pay
-            player_money = player_money - amount
+            player_money[player] = player_money[player] - amount
+            paid_test = 0
+
+
+
+
+
+
+#pretty clear I guess
+def mitigating_circumstances(player):
+    global player_money
+    global player_location
+    global no_remaining_player
+    global eduroam_money
+
+    m = random.randint(1,11)
+    if m == 1:    # Advance to "Startx". (Collect K 200)
+        player_location[player] == 0
+        player_money[player] += 200
+
+    if m==2: # Advance to "Byte Cafe" and relax. If you pass through the Startx, collect k 200. If owned, you do not need to pay, if unowned, you can buy it from the Bank.
+        if(player_location[player]>27):
+            player_money[player] +=200
+        player_location[player] = 27
+        if(location[27]>0):
+            player_money[player] += rentprice ## need to change it later
+
+    if m ==3: # You have been elected the chair of the tutorials for the rest of the semester. Collect k 25 from each player.
+        player_money[player] += 25 * no_remaining_player;
+        for i in range(3):
+            if skip[i] != 2 and i!= player:
+                player_money[i] -= 25
+                player_money[player] +=25
+
+
+    if m ==4: # Go directly to the tutor's room. If you pass through Startx do not collect K 200.
+        player_location[player]=10
+
+    if m == 5: # Advance token to nearest the server2. If unowned, you may buy it from the Bank. If owned, pay owner a total 10 times the amount thrown.
+        if player_location[player] >=0 and player_location[player]<5:
+            player_location[player] = 5
+        if player_location[player] >=5 and player_location[player]<15:
+            player_location[player] = 15
+        if player_location[player] >=15 and player_location[player]<25:
+            player_location[player] = 25
+        if player_location[player] >=25 and player_location[player]<35:
+            player_location[player] = 35
+        if player_location[player] >=35 and player_location[player]<=39:
+            player_location[player] = 5
+            player_money[player] += 200
+        if location[player]>0:
+            ### roll dice -- pay 10 times the amount thrown
+            println("Roll dice again")
+            x= random.randint(1,7)
+            y = random.randint(1,7)
+            println("You have thrown" + x+ " "+ y+ " ")
+            player_money[player] -= 10 * (x+y)
+
+    if m==6: #Congratulations! You won a hackathon. Collect k 100.
+        println("Congratulations! You won a hackathon. Collect k 100.")
+        player_money[player] += 100
+
+    if m ==7: # Get out of the tutor's room.
+        println("Get out of the tutor's room.")
+        escape[player] = 2  ## the player can escape the tutors room
+
+    if m==8:  #Ah for crying out loud. You got to an infinite loop and do not know how to solve it. Ask for help and pay k 50.
+        println("Ah for crying out loud. You got to an infinite loop and do not know how to solve it. Ask for help and pay k 50.")
+        player_money[player] -= 50
+        eduroam_money +=50
+
+    if m==9:# Unfortunately, you were not able to sit the exams. Go to Startx. Do not collect k200.
+        println("Unfortunately, you were not able to sit the exams. Go to Startx. Do not collect k200.")
+        player_location[player] = 0
+
+    if m==10: #Advance to the Lecture Theatre 1.2. If you pass through Startx do not collect k200. If owned, you do not have to pay the rent. If unowned, you may buy it from the Bank.
+        println("Advance to the Lecture Theatre 1.2. If you pass through Startx do not collect k200. If owned, you do not have to pay the rent. If unowned, you may buy it from the Bank.")
+        player_location[player] = 13
+
+
+
+#Yet again, pretty clear
+def deadlines(player):
+    global euduroam_money
+    global player_money
+    global player_location
+    global hotels_location
+    global houses_location
+    global location_price
+    d = random.randint(1,11)
+    if d==1:   #You missed a deadline. Pay k 50.
+        println("You missed a deadline. Pay k 50.")
+        player_money[player] -= 50
+        eduroam_money += 50
+
+    if d==2:  #You need to add optimisation to your code. Pay k 75.
+        println("You need to add optimisation to your code. Pay k 75.")
+        player_money[player] -= 75
+        eduroam_money += 75
+
+    if d==3: # You are behind with your work. Go to the tutor's room and ask for help. If you pass through Startx collect k 200.
+        println("You are behind with your work. Go to the tutor's room and ask for help. If you pass through Startx collect k 200.")
+        if player_location[player] >10:
+            player_money[player] += 200
+        player_location[player] = 10
+
+    if d==4: # Your new coursework is raising your concerns. You do not know if you will finish it on time. Go to Tooltil O and work. If you pass through Startx collect k200. If owned pay the rent, if unowned can buy it.
+        println("Your new coursework is raising your concerns. You do not know if you will finish it on time. Go to Tooltil O and work. If you pass through Startx collect k200. If owned pay the rent, if unowned can buy it.")
+        if(player_location[player]>37):
+            player_money[player] +=200
+        player_location[player] = 37
+
+    if d==5: #Midterms are rapidly approaching and you should focus on your work. Collect k 100 that would help you throughout this time.
+        player_money[player] += 100
+
+    if d==6: # You have finished your work on time. You deserve a treat. Collect k 50.
+        player_money[player] += 50
+
+
+    if d==7: # You need to finish your work on time. Go to LF 31. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total 5 times the amount thrown.  If you pass through Startx collect k 200.
+        if player_location[player] > 6:
+            player_money[player]+=200
+        player_location[player] = 6
+        if location[6] >0:
+            print("Throw dice again! ")
+            x= random.randint(1,7)
+            y = random.randint(1,7)
+            println("You have thrown " + x + " "+ y)
+
+            player_money[player] = player_money[player] -5*(x+y)
+
+
+
+
+    if d==8: #You need to give your final presentation. Pay each player k 25.
+        println("You need to give your final presentation. Pay each player k 25.")
+        for i in range(0, no_remaining_player):
+            player_money[player] -= 25
+            player_money[i] += 25
+
+
+    if d==9:#   Demo presentation before holiday. Pay k75.
+        player_money[player] -= 75
+
+    if d==10: # Final report deadline. Go to the Quiet Room and finish your report. If owned, pay 2 times the rent. If unowned, you may buy it. If you pass through Startx collect k200.
+        if player_location[player] > 26:
+            player_money[player] += 200
+        player_location[player] = 26
+        if location[26]>0:
+            player_money[player] -= rent*2 ### need to change variable
+
 
 
 
@@ -122,7 +273,7 @@ def check_ownable_locations(checked_location, player):
 
 
     #global variables
-    global location, player_money, location_price, server_counter, hotels_location, houses_location, utilities_counter, dice_value
+    global location, player_money, location_price, server_counter, hotels_location, houses_location, utilities_counter, dice_value, paid_test
 
 
 
@@ -147,23 +298,26 @@ def check_ownable_locations(checked_location, player):
                 rent = location_price[checked_location] / 4
             elif houses_location[checked_location] == 0:
                 rent = location_price[checked_location] / 10
-            check_pay = player_money[player]
+            paid_test = 1
+            initial_money = player_money[player]
             pay(player, rent, 0)
-            if (check_pay > player_money[player]):
+            if (paid_test == 0):
                 player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + location_price[checked_location]
             else:
-                player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + check_pay
+                player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + initial_money
         elif location[checked_location] > 6 and location[checked_location] <= 12 and location[checked_location] != player + 7:
             #player pays depending on the number of owned servers by the owner
-            check_pay = player_money[player]
+            paid_test = 1
+            initial_money = player_money[player]
             pay(player, 25 * (2**(server_counter[location[checked_location] - 7] - 1)), 0)
-            if (check_pay > player_money[player]):
+            if (paid_test == 0):
                 player_money[location[checked_location] - 7] = player_money[location[checked_location] - 7] + 25 * (2**(server_counter[location[checked_location] - 7] - 1))
             else:
-                player_money[location[checked_location] - 7] = player_money[location[checked_location] - 7] + check_pay
+                player_money[location[checked_location] - 7] = player_money[location[checked_location] - 7] + initial_money
         elif location[checked_location] > 12 and location[checked_location] != player + 13:
             # player pays depending on the number of owned utilities by the owner
-            check_pay = player_money[player]
+            paid_test = 1
+            initial_money = player_money[player]
             amout = 0
             if utilities_counter[location[checked_location] - 13] == 1:
                 amount = 4 * dice_value
@@ -171,10 +325,10 @@ def check_ownable_locations(checked_location, player):
             elif utilities_counter[location[checked_location] - 13] == 2:
                 amount = 10 * dice_value
                 pay(player, 10 * dice_value, 0)
-            if (check_pay > player_money[player]):
+            if (paid_test == 0):
                 player_money[location[checked_location] - 13] = player_money[location[checked_location] - 13] + amount
             else:
-                player_money[location[checked_location] - 13] = player_money[location[checked_location] - 13] + check_pay
+                player_money[location[checked_location] - 13] = player_money[location[checked_location] - 13] + initial_money
 
 
 
@@ -182,10 +336,10 @@ def check_ownable_locations(checked_location, player):
         # buying a location
         answer = input("Do you want to buy this location? [y/n]")
         if answer[0] == 'y':
-            check_pay = player_money[player]
+            paid_test = 1
             pay(player, location_price[checked_location], 1)
             #we check if the player afforded to pay for the location
-            if (check_pay > player_money[player]):
+            if (paid_test == 0):
                 #we check if it's server
                 if(checked_location == 5 or checked_location == 15 or checked_location == 25 or checked_location == 35):
                     server_counter[player] = server_counter[player] + 1
@@ -204,7 +358,7 @@ def check_ownable_locations(checked_location, player):
 #player is from 0-5
 def buy_houses(player):
 
-    global location, houses_location, player_money, location_price, hotels_location
+    global location, houses_location, player_money, location_price, hotels_location, paid_test
 
 
     #buying houses
@@ -229,9 +383,9 @@ def buy_houses(player):
             answer2 = int(answer2)
 
 
-        check_bought = player_money[player]
+        paid_test = 1
         pay(player, answer2 * location_price[answer1] * 2/5, 1)
-        if(player_money[player] < check_bought):
+        if(paid_test == 0):
             houses_location[answer1] = houses_location[answer1] + answer2
         else:
             print("You don't have enough money!!!")
@@ -254,9 +408,9 @@ def buy_houses(player):
             if(houses_location[answer1] != 4 or hotels_location[answer1] != 0):
                 print("You can't place a hotel here!!!")
 
-            check_bought = player_money[player]
+            paid_test = 1
             pay(player, location_price[answer1] * 2, 1)
-            if (player_money[player] < check_bought):
+            if (paid_test == 0):
                 houses_location[answer1] = 0
                 hotels_location[answer1] = 1
             else:
@@ -275,7 +429,7 @@ def buy_houses(player):
 #player is from 0-5
 def checkskip(player):
 
-    global player_escape, skip, player_money
+    global player_escape, skip, player_money, paid_test
 
     #skip = 1 when the player is in the tutors room
     if (skip[player] == 1):
@@ -286,9 +440,9 @@ def checkskip(player):
                 player_escape[player] = 0
         #if the player either doesn't have the escape card, or doesn't want to use it, he has to pay 50
 
-        check_payed = player_money[player]
+        paid_test = 1
         pay(player, 50, 0)
-        if(check_payed > player_money[player]):
+        if(paid_test == 0):
             skip[player] = 0
             print("You got out of prison!")
 
@@ -329,32 +483,31 @@ def move_player(player, value_dice):
 #player is from 0-5
 def check_place(player):
 
-    global player_location, location, player_money, location_price, eduroam_money, skip
+    global player_location, location, player_money, location_price, eduroam_money, skip, paid_test
 
     #just a variable
     check_location = player_location[player]
 
     # deadlines
     if(location[check_location] == -1):
-        #nothing for now
-        return
+        deadlines(player)
 
     # mitigating_circumstances
     elif(location[check_location] == -2):
-        # nothing for now
-        return
+        mitigating_circumstances(player)
 
     #stuff to pay(vending machine, rent, tuition fees, microwave)
     elif(location[check_location] == -3):
-        check_paid = player_money[player]
+        paid_test = 1
+        initial_money = player_money[player]
         #the player pays
         pay(player, location_price[check_location], 0)
         #if he paid, the payed money goes to eduroam
-        if (check_paid > player_money[player]):
+        if (paid_test == 0):
             eduroam_money = eduroam_money + location_price[check_location]
         #if he didn't pay, he lost and all his money go to eduroam
         else:
-            eduroam_money = eduroam_money + player_money[player]
+            eduroam_money = eduroam_money + initial_money
 
 
     #if a player lands on tutor's room, nothing happens, he's just visiting
@@ -422,6 +575,7 @@ utilities_counter = []              # this list tells us how many utilities each
 eduroam_money = 0                   #this variable tells us how many money a player gets for when he lands on eduroam
 roll_counter = 0                    #this variable counts how many time a player rolled the dice
 dice_value = 0                      #this variable tells us how much a player rolled
+paid_test = 0                      #this variable tells us if a payment was made succesfully or not
 
 
 #MAIN program starts here
@@ -541,7 +695,7 @@ while no_remaining_player > 1:
             check_place(player_turn)
             print("You landed on " + str(player_location[player_turn]))
             print("You have " + str(player_money[player_turn]) + " money!")
-            while dice1 == dice2 and roll_counter < 4:
+            while dice1 == dice2 and roll_counter < 4 and skip == 0:
                 dice1 = random.randint(1, 6)
                 dice2 = random.randint(1, 6)
                 dice_value = dice1 + dice2
