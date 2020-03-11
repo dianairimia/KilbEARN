@@ -18,6 +18,7 @@ def mitigating_circumstances(player):
         if(player_location[player]>27):
             player_money[player] +=200
         player_location[player] = 27
+        check
         #if(location[27]==0):
             #answer = input("Do you want to buy this location? [y/n]")
             #if answer[0] == 'y':
