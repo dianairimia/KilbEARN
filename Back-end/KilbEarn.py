@@ -202,7 +202,7 @@ def mitigating_circumstances(player):
             print("Roll dice again")
             x= random.randint(1,6)
             y = random.randint(1,6)
-            print("You have thrown" + x+ " "+ y+ " ")
+            print("You have thrown" + str(x) + " "+ str(y) + " ")
             check_pay = 1   # player didnt pay
             initial_money = player_money[player]
             pay(player, 10*(x+y), 0)
@@ -311,7 +311,7 @@ def deadlines(player):
             print("Throw dice again! ")
             x= random.randint(1,6)
             y = random.randint(1,6)
-            print("You have thrown " + x + " "+ y)
+            print("You have thrown " + str(x) + " "+ str(y))
             check_pay = 1   # player didnt pay
             initial_money = player_money[player]
             pay(player, 5*(x+y), 0)
@@ -644,196 +644,211 @@ def check_place(player):
 
 
 
+def main():
+    #GLOBAL DECLARED VARIABLES HERE
+    global location
+    location = []                       #this list tells us what kind of location each location is
+                                        #(indicies: 0-39)
+                                        #values: 0 -> ownable, nobody owns it
+                                        #        1-6 -> location where houses can be placed, owned by player i
+                                        #        7-12 -> server, owned by player i-6
+                                        #        -1 -> deadlines
+                                        #        -2 -> mitigating circumstances
+                                        #        -3 -> pay stuff (rent, tuition fees)
+                                        #        -4 -> tutor's room
+                                        #        -5 -> eduroam
+                                        #        -6 -> go to tutor's room
+                                        #        -7 -> startx
+                                        #        13-18 -> utilities(vending machine, microwave)
+    global player_money
+    player_money = []                   #this list tells us the amount of money each player has
+                                        #(indicies: 0-5 aka player number - 1)
+    global location_price
+    location_price = []                 #this list tells us what is the price of each location, or the price of a house if someone
+                                        #has houses there, or of a hotel if someone owns a hotel there
+                                        #(indicies: 0-39)
+    global skip
+    skip = []                           #this list tells use which players are in prison or lost
+                                        #(indicies: 0-5)
+                                        #(values; 0->he is not skipped, 1->he is in tutors room, 2->he lost)
+    global hotels_location
+    hotels_location = []                #this list tells us if there are hotels on a property
+                                        #(indicies: 0-39)
+                                        #(values: 0-> no hotel here, 1-> hotel here)
+    global houses_location
+    houses_location = []                #this list tells us how many houses are on a property
+                                        #(indicies: 0-39)
+                                        #(values: 0-> no houses here, i-> i houses here)
+    global player_location
+    player_location = []                #this list tells us where each player is
+                                        #(indicies: 0-5)
+                                        #(values: 0-39-> the player's location)
+    global player_escape
+    player_escape = []                  #this list tells us if the player has an escape the tutors room card
+                                        #(indicies: 0-5)
+                                        #(values: 0-> the player doesn't own a card, 1-> the player owns a card)
+    global server_counter
+    server_counter = []                 #this list tells us how many servers each player owns
+                                        #(indicies: 0-5)
+                                        #(values: 0-4 -> the number of servers owned by the player)
+    global utilities_counter
+    utilities_counter = []              # this list tells us how many utilities each player owns
+                                        # (indicies: 0-5)
+                                        # (values: 0-2 -> the number of utilities owned by the player)
 
-#GLOBAL DECLARED VARIABLES HERE
-
-location = []                       #this list tells us what kind of location each location is
-                                    #(indicies: 0-39)
-                                    #values: 0 -> ownable, nobody owns it
-                                    #        1-6 -> location where houses can be placed, owned by player i
-                                    #        7-12 -> server, owned by player i-6
-                                    #        -1 -> deadlines
-                                    #        -2 -> mitigating circumstances
-                                    #        -3 -> pay stuff (rent, tuition fees)
-                                    #        -4 -> tutor's room
-                                    #        -5 -> eduroam
-                                    #        -6 -> go to tutor's room
-                                    #        -7 -> startx
-                                    #        13-18 -> utilities(vending machine, microwave)
-player_money = []                   #this list tells us the amount of money each player has
-                                    #(indicies: 0-5 aka player number - 1)
-location_price = []                 #this list tells us what is the price of each location, or the price of a house if someone
-                                    #has houses there, or of a hotel if someone owns a hotel there
-                                    #(indicies: 0-39)
-skip = []                           #this list tells use which players are in prison or lost
-                                    #(indicies: 0-5)
-                                    #(values; 0->he is not skipped, 1->he is in tutors room, 2->he lost)
-hotels_location = []                #this list tells us if there are hotels on a property
-                                    #(indicies: 0-39)
-                                    #(values: 0-> no hotel here, 1-> hotel here)
-houses_location = []                #this list tells us how many houses are on a property
-                                    #(indicies: 0-39)
-                                    #(values: 0-> no houses here, i-> i houses here)
-player_location = []                #this list tells us where each player is
-                                    #(indicies: 0-5)
-                                    #(values: 0-39-> the player's location)
-player_escape = []                  #this list tells us if the player has an escape the tutors room card
-                                    #(indicies: 0-5)
-                                    #(values: 0-> the player doesn't own a card, 1-> the player owns a card)
-server_counter = []                 #this list tells us how many servers each player owns
-                                    #(indicies: 0-5)
-                                    #(values: 0-4 -> the number of servers owned by the player)
-utilities_counter = []              # this list tells us how many utilities each player owns
-                                    # (indicies: 0-5)
-                                    # (values: 0-2 -> the number of utilities owned by the player)
-
-eduroam_money = 0                   #this variable tells us how many money a player gets for when he lands on eduroam
-roll_counter = 0                    #this variable counts how many time a player rolled the dice
-dice_value = 0                      #this variable tells us how much a player rolled
-paid_test = 0                      #this variable tells us if a payment was made succesfully or not
-
-
-#MAIN program starts here
-
-
-#initialising the board
-for i in range (40):
-    houses_location.append(0)
-    hotels_location.append(0)
-    #this is just a place holder for now...
-    # we are going to introduce each locations price
-    location_price.append(0)
-    location.append(0)
-
-#we have to manually update each unownable location
-location[0] = -7
-location[2] = -2
-location[4] = -3
-location[7] = -1
-location[10] = -4
-location[17] = -2
-location[20] = -5
-location[22] = -1
-location[30] = -6
-location[33] = -2
-location[36] = -1
-location[38] = -3
+    global eduroam_money
+    eduroam_money = 0                   #this variable tells us how many money a player gets for when he lands on eduroam
+    global roll_counter
+    roll_counter = 0                    #this variable counts how many time a player rolled the dice
+    global dice_value
+    dice_value = 0                      #this variable tells us how much a player rolled
+    global paid_test
+    paid_test = 0                      #this variable tells us if a payment was made succesfully or not
 
 
-#we initialise all location_price
-location_price[1] = 60
-location_price[3] = 60
-location_price[4] = 200
-location_price[5] = 200
-location_price[6] = 100
-location_price[8] = 100
-location_price[9] = 120
-location_price[11] = 140
-location_price[12] = 150
-location_price[13] = 140
-location_price[14] = 160
-location_price[15] = 200
-location_price[16] = 180
-location_price[18] = 180
-location_price[19] = 200
-location_price[21] = 220
-location_price[23] = 220
-location_price[24] = 240
-location_price[25] = 200
-location_price[26] = 260
-location_price[27] = 260
-location_price[28] = 150
-location_price[29] = 260
-location_price[31] = 300
-location_price[32] = 300
-location_price[34] = 320
-location_price[35] = 200
-location_price[37] = 350
-location_price[38] = 100
-location_price[39] = 400
+    #MAIN program starts here
 
 
+    #initialising the board
+    for i in range (40):
+        houses_location.append(0)
+        hotels_location.append(0)
+        #this is just a place holder for now...
+        # we are going to introduce each locations price
+        location_price.append(0)
+        location.append(0)
+
+    #we have to manually update each unownable location
+    location[0] = -7
+    location[2] = -2
+    location[4] = -3
+    location[7] = -1
+    location[10] = -4
+    location[17] = -2
+    location[20] = -5
+    location[22] = -1
+    location[30] = -6
+    location[33] = -2
+    location[36] = -1
+    location[38] = -3
 
 
-#finding out the number of players
-no_players = input("Insert the number of players(2-6): ")
-no_players = int(no_players)
-
-
-#number of players still playing
-no_remaining_player = no_players
-
-
-#initialising our lists related to the number of players
-for i in range (no_players):
-    #each player starts with 1500 K...something
-    player_money.append(1500)
-    #each player starts on the position 0, aka on startx
-    player_location.append(0)
-    #each player starts with skip = 0
-    skip.append(0)
-    #each player starts with no escape card
-    player_escape.append(0)
-    #each player starts with 0 servers
-    server_counter.append(0)
-    utilities_counter.append(0)
+    #we initialise all location_price
+    location_price[1] = 60
+    location_price[3] = 60
+    location_price[4] = 200
+    location_price[5] = 200
+    location_price[6] = 100
+    location_price[8] = 100
+    location_price[9] = 120
+    location_price[11] = 140
+    location_price[12] = 150
+    location_price[13] = 140
+    location_price[14] = 160
+    location_price[15] = 200
+    location_price[16] = 180
+    location_price[18] = 180
+    location_price[19] = 200
+    location_price[21] = 220
+    location_price[23] = 220
+    location_price[24] = 240
+    location_price[25] = 200
+    location_price[26] = 260
+    location_price[27] = 260
+    location_price[28] = 150
+    location_price[29] = 260
+    location_price[31] = 300
+    location_price[32] = 300
+    location_price[34] = 320
+    location_price[35] = 200
+    location_price[37] = 350
+    location_price[38] = 100
+    location_price[39] = 400
 
 
 
-#the main game loop starts here
-#the game ends when there is only  1 player left
-while no_remaining_player > 1:
+
+    #finding out the number of players
+    global no_players
+    no_players = input("Insert the number of players(2-6): ")
+    no_players = int(no_players)
 
 
-    #this for gives each player's turn
-    for player_turn in range (no_players):
-        print("It's " + str(player_turn + 1) + "'s player turn!")
-
-        #first thing first, if the player is not in prison or didn't lose he can buy houses
+    #number of players still playing
+    global no_remaining_player
+    no_remaining_player = no_players
 
 
-        #we check if the player rolls the dice this turn
-        if (skip[player_turn] > 0):
-            #we check why the player is skiped, like if he is in tutor's room or he lost
-            checkskip(player_turn)
-        else:
-            buy_houses(player_turn)
-            #now the dice roll for the players
-            dice1 = random.randint(1, 6)
-            dice2 = random.randint(1, 6)
-            dice_value = dice1 + dice2
-            print("You rolled " + str(dice1) + " with " + str(dice2))
-            roll_counter = 1
-            move_player(player_turn, dice_value)
-            print("You landed on " + str(player_location[player_turn]))
-            print("You have " + str(player_money[player_turn])+ " money!")
-            check_place(player_turn)
-            print("You landed on " + str(player_location[player_turn]))
-            print("You have " + str(player_money[player_turn]) + " money!")
-            while dice1 == dice2 and roll_counter < 4 and skip == 0:
+    #initialising our lists related to the number of players
+    for i in range (no_players):
+        #each player starts with 1500 K...something
+        player_money.append(1500)
+        #each player starts on the position 0, aka on startx
+        player_location.append(0)
+        #each player starts with skip = 0
+        skip.append(0)
+        #each player starts with no escape card
+        player_escape.append(0)
+        #each player starts with 0 servers
+        server_counter.append(0)
+        utilities_counter.append(0)
+
+
+
+    #the main game loop starts here
+    #the game ends when there is only  1 player left
+    while no_remaining_player > 1:
+
+
+        #this for gives each player's turn
+        for player_turn in range (no_players):
+            print("It's " + str(player_turn + 1) + "'s player turn!")
+
+            #first thing first, if the player is not in prison or didn't lose he can buy houses
+
+
+            #we check if the player rolls the dice this turn
+            if (skip[player_turn] > 0):
+                #we check why the player is skiped, like if he is in tutor's room or he lost
+                checkskip(player_turn)
+            else:
+                buy_houses(player_turn)
+                #now the dice roll for the players
                 dice1 = random.randint(1, 6)
                 dice2 = random.randint(1, 6)
                 dice_value = dice1 + dice2
                 print("You rolled " + str(dice1) + " with " + str(dice2))
-                roll_counter = roll_counter + 1
-                if dice1 == dice2 and roll_counter == 3:
-                    skip = 1
-                    player_location[player_turn] = 10
-                else:
-                    move_player(player_turn, dice_value)
-                    print("You landed on " + str(player_location[player_turn]))
-                    print("You have " + str(player_money[player_turn]) + " money!")
-                    check_place(player_turn)
-                    print("You landed on " + str(player_location[player_turn]))
-                    print("You have " + str(player_money[player_turn]) + " money!")
+                roll_counter = 1
+                move_player(player_turn, dice_value)
+                print("You landed on " + str(player_location[player_turn]))
+                print("You have " + str(player_money[player_turn])+ " money!")
+                check_place(player_turn)
+                print("You landed on " + str(player_location[player_turn]))
+                print("You have " + str(player_money[player_turn]) + " money!")
+                while dice1 == dice2 and roll_counter < 4 and skip == 0:
+                    dice1 = random.randint(1, 6)
+                    dice2 = random.randint(1, 6)
+                    dice_value = dice1 + dice2
+                    print("You rolled " + str(dice1) + " with " + str(dice2))
+                    roll_counter = roll_counter + 1
+                    if dice1 == dice2 and roll_counter == 3:
+                        skip = 1
+                        player_location[player_turn] = 10
+                    else:
+                        move_player(player_turn, dice_value)
+                        print("You landed on " + str(player_location[player_turn]))
+                        print("You have " + str(player_money[player_turn]) + " money!")
+                        check_place(player_turn)
+                        print("You landed on " + str(player_location[player_turn]))
+                        print("You have " + str(player_money[player_turn]) + " money!")
 
-        if no_remaining_player == 1:
-            for k in range (no_players):
-                if skip[k] != 2:
-                    print("Player " + str(k+1) + "WON!!!")
-            break
+            if no_remaining_player == 1:
+                for k in range (no_players):
+                    if skip[k] != 2:
+                        print("Player " + str(k+1) + "WON!!!")
+                break
 
-
+main()
 
 
 
