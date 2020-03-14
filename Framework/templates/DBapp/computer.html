@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static "css/loginregister.css" %}"/>
+    <script src="{% static 'scripts/noroom.js' %}"></script>
   </head>
 
   <body class="text-center">
@@ -40,36 +41,56 @@
     placeholder="Name" required autofocus>
     <br>
     <h3 class="h3 mb-3 font-weight-normal">Select Your Icon</h3>
+
     <div class="container">
       <div class="row top-buffer">
-          <button class="btn btn-cplus btn-secondary"></button>
-          <button class="btn btn-csh btn-secondary"></button>
-          <button class="btn btn-haskell btn-secondary"></button>
-          <button class="btn btn-jss btn-secondary"></button>
-          <button class="btn btn-ruby btn-secondary"></button>
-          <button class="btn btn-python btn-secondary"></button>
-          <button class="btn btn-swift btn-secondary"></button>
+        <form>
+        <label class="test">
+        <input type="radio" name="icon" value="small">
+        <img src="{% static 'images/c++squared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="big">
+        <img src="{% static 'images/Cshsquared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small">
+        <img src="{% static 'images/haskellsquared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="{% static 'images/jssquared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="{% static 'images/rubysquared.png' %}"width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="{% static 'images/squaredpython.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="{% static 'images/swiftsquared.png' %}" width="40" height="40" />
+        </label>
+      </form>
       </div>
+
       <br>
 
-      <h3 class="h3 mb-3 font-weight-normal">Select Your Icon</h3>
-
       <div class="row top-buffer">
-          <a class="btn btn-secondary btn-lg btn-block" href=".html" role="button">Save Player</a>
-      </div>
-
-      <div class="row top-buffer">
-        <div class="col">
-        <a class="btn btn-secondary btn-sm btn-block" href=".html" role="button">Add Player</a>
-        </div>
-        <div class="col">
-        <a class="btn btn-secondary btn-sm btn-block" href="board.html" role="button">SAVE & PLAY</a>
-        </div>
+          <a class="btn btn-secondary btn-lg btn-block" href="#.href" type="button">Add Player</a>
+          <a class="btn btn-secondary btn-lg btn-block" href="board.html">SAVE & PLAY</a>
       </div>
 
       <div class="row top-buffer">
         <a class="btn btn-secondary btn-lg btn-block" href="play.html" role="button">Back</a>
-        <!-- <button type="button" class="btn btn-secondary btn-sm btn-block" href="play.html">Back</button> -->
       </div>
 
     </div>

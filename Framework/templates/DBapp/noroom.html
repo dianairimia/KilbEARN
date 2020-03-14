@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static "css/loginregister.css" %}"/>
-	<script src="{% static 'scripts/noroom.js' %}"></script> 
+    <script src="{% static 'scripts/noroom.js' %}"></script>
   </head>
 
   <body class="text-center">
@@ -46,17 +46,17 @@
       <div class="row top-buffer">
         <form>
         <label class="test">
-        <input type="radio" name="icon" value="small" unchecked>
+        <input type="radio" name="icon" value="small">
         <img src="{% static 'images/c++squared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="big" unchecked>
+        <input type="radio" name="icon" value="big">
         <img src="{% static 'images/Cshsquared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="small" unchecked>
+        <input type="radio" name="icon" value="small">
         <img src="{% static 'images/haskellsquared.png' %}" width="40" height="40" />
         </label>
 
@@ -67,7 +67,7 @@
 
         <label class="test">
         <input type="radio" name="icon" value="small" >
-        <img src="{% static 'images/rubysquared.png' %}" width="40" height="40" />
+        <img src="{% static 'images/rubysquared.png' %}"width="40" height="40" />
         </label>
 
         <label class="test">
@@ -85,8 +85,8 @@
       <br>
 
       <div class="row top-buffer">
-          <a class="btn btn-secondary btn-lg btn-block" href="#.html" role="button">Add Player</a>
-          <a class="btn btn-secondary btn-lg btn-block" href="board.html" role="button">SAVE & PLAY</a>
+          <a class="btn btn-secondary btn-lg btn-block" onclick="added()" href="#.href" type="button">Add Player</a>
+          <a class="btn btn-secondary btn-lg btn-block" href="board.html">SAVE & PLAY</a>
       </div>
 
       <div class="row top-buffer">
