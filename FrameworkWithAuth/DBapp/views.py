@@ -111,6 +111,9 @@ def register(request):
                 data.save()
                 safecopy = User(username=form.cleaned_data['username'], password=Hasher(form.cleaned_data['password']), email=form.cleaned_data['email'])
                 safecopy.save()
+                for users in User.objects.all():
+                    if str(users)==form.cleaned_data['username']:
+                        login(request, users)
                 return redirect('mainmenu.html')
     except:
         #return render(request, 'DBapp/register2.html', {'form':form})
@@ -123,7 +126,9 @@ def settings(request):
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/settings.html', context=val_dict)
 
-@login_required
+
 def welcome(request):
+    if request.user.is_authenticated:
+        logout(request)
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/welcome.html', context=val_dict)
