@@ -123,6 +123,7 @@ def mitigating_circumstances(player):
     global location_price
     global location
     global skips
+    global paid_test
 
 
     m = random.randint(1,10)
@@ -153,11 +154,11 @@ def mitigating_circumstances(player):
         print("You have been elected the chair of the tutorials for the rest of the semester. Collect k 25 from each player.")
         for i in range(no_remaining_player):
             if skip[i] != 2 and i!= player:
-                check_pay = 1   # player didnt pay
+                paid_test = 1   # player didnt pay
                 initial_money = player_money[i]
                 pay(i, 25, 0)
-                if check_pay == 0:
-                    player_money[player] += 25
+                if paid_test == 0:
+                    player_money[player] = player_money[player] + 25
                 else:
                     player_money[player] += initial_money
 
@@ -203,10 +204,10 @@ def mitigating_circumstances(player):
             x= random.randint(1,6)
             y = random.randint(1,6)
             print("You have thrown" + str(x) + " "+ str(y) + " ")
-            check_pay = 1   # player didnt pay
+            paid_test = 1   # player didnt pay
             initial_money = player_money[player]
             pay(player, 10*(x+y), 0)
-            if check_pay == 0:
+            if paid_test == 0:
                 player_money[owner] += 10*(x+y)
             else:
                 player_money[player] += initial_money
@@ -226,10 +227,10 @@ def mitigating_circumstances(player):
 
     if m==8:  #Ah for crying out loud. You have an infinite loop and do not know how to solve it. Ask for help and pay k 50.
         print("Ah for crying out loud. You have an infinite loop and do not know how to solve it. Ask for help and pay k 50.")
-        check_pay = 1   # player didnt pay
+        paid_test = 1   # player didnt pay
         initial_money = player_money[player]
         pay(player, 50, 0)
-        if check_pay == 0:
+        if paid_test == 0:
             eduroam_money += 50
         else:
             eduroam_money += initial_money
@@ -253,16 +254,16 @@ def deadlines(player):
     global hotels_location
     global houses_location
     global location_price
-    global check_pay
+    global paid_test
     global location
 
     d = random.randint(1,10)
     if d==1:   #You missed a deadline. Pay k 50.
         print("You missed a deadline. Pay k 50.")
-        check_pay = 1   # player didnt pay
+        paid_test = 1   # player didnt pay
         initial_money = player_money[player]
         pay(player, 50, 0)
-        if check_pay == 0:
+        if paid_test == 0:
             eduroam_money += 50
         else:
             eduroam_money += initial_money
@@ -271,10 +272,10 @@ def deadlines(player):
 
     if d==2:  #You need to add optimisation to your code. Pay k 75.
         print("You need to add optimisation to your code. Pay k 75.")
-        check_pay = 1   # player didnt pay
+        paid_test = 1   # player didnt pay
         initial_money = player_money[player]
         pay(player, 75, 0)
-        if check_pay == 0:
+        if paid_test == 0:
             eduroam_money += 75
         else:
             eduroam_money += initial_money
@@ -312,10 +313,10 @@ def deadlines(player):
             x= random.randint(1,6)
             y = random.randint(1,6)
             print("You have thrown " + str(x) + " "+ str(y))
-            check_pay = 1   # player didnt pay
+            paid_test = 1   # player didnt pay
             initial_money = player_money[player]
             pay(player, 5*(x+y), 0)
-            if check_pay == 0:
+            if paid_test == 0:
                 player_money[location[6]-1] += 50
             else:
                  player_money[location[6]-1] += initial_money
@@ -326,10 +327,10 @@ def deadlines(player):
         print("You need to give your final presentation. Pay each player k 25.")
         for i in range(0, no_remaining_player):
             if player != i:
-                check_pay = 1   # player didnt pay
+                paid_test = 1   # player didnt pay
                 initial_money = player_money[player]
                 pay(player, 25, 0)
-                if check_pay == 0:
+                if paid_test == 0:
                     player_money[i] += 25
                 else:
                     player_money[i] += initial_money
@@ -337,10 +338,10 @@ def deadlines(player):
 
     if d==9:#   Demo presentation before holiday. Pay k75.
         print("Demo before holiday. Pay k75.")
-        check_pay = 1   # player didnt pay
+        paid_test = 1   # player didnt pay
         initial_money = player_money[player]
         pay(player, 75, 0)
-        if check_pay == 0:
+        if paid_test == 0:
             eduroam_money += 75
         else:
             eduroam_money += initial_money
@@ -369,12 +370,13 @@ def deadlines(player):
                     rent = location_price[6] / 4
                 elif houses_location[6] == 0:
                     rent = location_price[6] / 10
-                check_pay = player_money[player]
+                paid_test = 1
+                initial_money = player_money[player]
                 pay(player, 2 * rent, 0)
-                if (check_pay > player_money[player]):
+                if (paid_test == 0):
                     player_money[location[6] - 1] = player_money[location[6] - 1] + 2* location_price[6]
                 else:
-                    player_money[location[6] - 1] = player_money[location[6] - 1] + check_pay
+                    player_money[location[6] - 1] = player_money[location[6] - 1] + initial_money
 
 
 
