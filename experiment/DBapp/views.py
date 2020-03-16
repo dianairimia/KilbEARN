@@ -1,16 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from DBapp.models import Main, Friends
+from DBapp.models import Main, Friends, Icons
 from django.contrib.auth.models import User
 from django import forms
 from . import forms
 from django.shortcuts import redirect
-import hashlib
-from DBapp.KilbEarn import main
-
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+import hashlib
+#import DBapp.KilbEarn as Kilbearn
+
 
 
 
@@ -75,31 +75,89 @@ def mainmenu(request):
 
 @login_required
 def noroom(request):
-    form1=forms.NoRoomNameGrab()
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
-    return render(request, 'DBapp/noroom.html', {'form':form1})
+
+    if request.method=="POST" and "sendNumberPlayer" in request.POST:
+        x=len(list(Icons.objects.all()))
+    if request.method=="POST":
+        if len(list(Icons.objects.all())) < 4:
+            try:
+                record=Icons(username=request.POST.get('Name'), icon=request.POST.get('icon'))
+                record.save()
+                print("Successfully added to database")
+                return render(request, 'DBapp/noroom.html')
+            except:
+                return render(request, 'DBapp/noroom.html')
+        else:
+            return HttpResponse("<h1 onload=alert('4 players only Click PLAY')></h1>")
+
+    return render(request, 'DBapp/noroom.html', context=val_dict)
 
 @login_required
 def people(request):
+    Icons.objects.all().delete()
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/people.html', context=val_dict)
 
 @login_required
 def play(request):
+    Icons.objects.all().delete()
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
     return render(request, 'DBapp/play.html', context=val_dict)
 
 @login_required
 def profile(request):
-    val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
-    return render(request, 'DBapp/profile.html', context=val_dict)
+    if request.method=="POST" and 'Delete' in request.POST:
+        cu=request.user
+        for i in Main.objects.all():
+            x=str(i).split()
+            if str(request.user)==x[0]:
+                i.delete()
+        logout(request)
+        cu.delete()
+        return render(request, 'DBapp/Welcome.html')
+
+    if request.method=="POST" and 'ChPass' in request.POST:
+        newpass=request.POST.get('password')
+        cu=request.user
+        for i in Main.objects.all():
+            x=str(i).split()
+            if str(request.user) == x[0]:
+                i.hash = Hasher(newpass)
+                i.save()
+        cu.set_password(newpass)
+        cu.save()
+
+        logout(request)
+        return render(request, 'DBapp/Welcome.html')
+
+    if request.method=="POST" and 'ChUsername' in request.POST:
+        newname=request.POST.get('username')
+        cu=request.user
+        for i in Main.objects.all():
+            x=str(i).split()
+            if str(request.user) == x[0]:
+                i.username = newname
+                i.save()
+        cu.username=newname
+        cu.save()
+
+        logout(request)
+        return render(request, 'DBapp/Welcome.html')
+
+    if request.method=="POST" and 'ChEmail' in request.POST:
+        print("Implement change of Email")
+
+    return render(request, 'DBapp/profile.html')
 
 @login_required
 def board(request):
         val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
         return render(request, 'DBapp/board.html', context=val_dict)
-        if request.method=="POST":
-            main()
+        if method=="POST":
+            #main()
+            print("call main here")
+
 
 
 def register(request):
@@ -131,6 +189,7 @@ def settings(request):
 
 
 def welcome(request):
+    Icons.objects.all().delete()
     if request.user.is_authenticated:
         logout(request)
     val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
