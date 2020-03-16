@@ -14,7 +14,7 @@ function rollDice1() {
 }
 
 function removeSides1( callback) {
- 
+
 }
 
 function toggleClasses1(die1) {
@@ -49,8 +49,8 @@ function rollDice2() {
 }
 
 function removeSides2( callback) {
- 
-  
+
+
 }
 
 function toggleClasses2(die2) {
