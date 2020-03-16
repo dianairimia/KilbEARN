@@ -1,15 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="./dice.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+    shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <title>PLAY</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="loginregister.css" rel="stylesheet">
+    <!-- <script src="board.js" type="text/javascript"></script> -->
+
+    <style>
+    body {
+      background-color: #CAD9B5;
+    }
+    </style>
 
   </head>
-  <body>
+
+  <body class="text-center">
+
+    <!--  Music: https://www.bensound.com -->
+    <audio id="track" loop>
+      <source src="bensound-jazzyfrenchy.mp3" type="audio/mpeg" />
+    </audio>
+
+    <form class="form-signin">
 
 
-    <div class="mainDiv">
+      <div id="player-container">
+        <div id="play-pause" class="play">Play</div>
+      </div>
+
+      <a class="btn btn-secondary btn-quit" onclick="loadHomePage()" type="button"></a>
+
+      <nav role="navigation">
+          <div id="menuToggle">
+              <input type="checkbox" />
+              <span></span>
+              <span></span>
+              <span></span>
+              <ul id="menu">
+                  <a href="profile.html"><li>Profile</li></a>
+                  <a href="settings.html"><li>Settings</li></a>
+                  <a href="#"><li>About</li></a>
+                  <a href="instructions.html"><li>Instructions</li></a>
+                  <a href="https://images.app.goo.gl/pjh7DtfLYrhPts5y9" target="_blank"><li>ARGHHH</li></a>
+                  <img src="kilburnlogo.png" height="200" width="auto">
+              </ul>
+          </div>
+      </nav>
+
+      <div class="mainDiv">
       <div class="dice1">
         <ol class="die-list1 even-roll" data-roll="1" id="die-1">
           <li class="die-item1" data-side="1">
@@ -85,9 +135,20 @@
           </li>
         </ol>
       </div>
-      <button type="button" id="roll-button">Roll Dice</button>
+      <button type="button" class="btn btn-secondary btn-lg btn-dice btn-group" id="roll-button">Roll Dice</button>
     </div>
 
-    <script src="dice.js" type="text/javascript"></script>
+      <div class="outsideWrapper">
+          <div class="insideWrapper">
+              <img id = "board" class="coveredImage" src = "BOARD.jpg">
+              <canvas id="canvas" width = "570" height = "570" class="coveringCanvas"></canvas>
+          </div>
+      </div>
+    </form>
+
+
+    <script src="board.js" type="text/javascript"></script>
   </body>
+
+
 </html>

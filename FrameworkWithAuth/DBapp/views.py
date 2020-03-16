@@ -6,6 +6,7 @@ from django import forms
 from . import forms
 from django.shortcuts import redirect
 import hashlib
+from KilbEarn import main
 
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
@@ -97,6 +98,8 @@ def profile(request):
 def board(request):
         val_dict = {'insert_val':"This can be modified with python, in the views.py file in DBapp" }
         return render(request, 'DBapp/board.html', context=val_dict)
+        if request.method=="POST":
+            main()
 
 
 def register(request):
