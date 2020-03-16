@@ -6,6 +6,7 @@ from django import forms
 from . import forms
 from django.shortcuts import redirect
 import hashlib
+from KilbEarn import main
 
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
