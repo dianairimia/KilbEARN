@@ -50,3 +50,7 @@ function removeCustomAlert() {
 function ful() {
   alert('Alert this pages');
 }
+
+// function playAudio() {
+//   audio.play();
+// }

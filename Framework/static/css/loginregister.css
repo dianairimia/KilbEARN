@@ -1,3 +1,4 @@
+
 html,
 body {
   height: 100%;
@@ -90,70 +91,50 @@ button.selected{
   text-align: center;
 }
 
-.btn-cplus {
-            background-image: url('c++squared.png');
+.btn-quit {
+            background-image: url('newX.png');
+            background-size: 35px 35px;
             background-color: transparent !important;
-            background-size: cover;
-            width: 40px;
-            height: 40px;
-            outline: white;
-            border-color: white !important;
-            outline-color: white !important;
+            width: 35px;
+            height: 35px;
+            position: fixed;
+            left: 129px;
+            top: 30px;
+            z-index:1;
 }
-
-.btn-csh {
-            background-image: url('Cshsquared.png');
-            background-color: transparent !important;
-            background-size: cover;
-            width: 40px;
-            height: 40px;
-            outline: white;
-            border: white;
+.btn-check {
+            background-size: 35px 35px;
+            background-color: pink !important;
+            width: 50px;
+            height: 100px;
+            position: fixed;
+            left: 300px;
+            top: 300px;
+            z-index:1;
 }
-.btn-haskell {
-            background-image: url('haskellsquared.png');
-            background-color: transparent !important;
-            background-size: cover;
-            width: 40px;
-            height: 40px;
-            outline: none;
-            border: none;
+.btn-done {
+        position: fixed;
+        left: 240px;
+        top: 230px;
+        z-index:1;
 }
-.btn-jss {
-            background-image: url('jssquared.png');
-            background-color: transparent !important;
-            background-size: cover;
-            width: 40px;
-            height: 40px;
-            outline: none;
-            border: none;
+.btn-property{
+  position: fixed;
+  left: 350px;
+  top: 110px;
+  z-index:1;
 }
-.btn-ruby {
-            background-image: url('rubysquared.png');
-            background-color: transparent !important;
-            background-size: cover;
-            width: 40px;
-            height: 40px;
-            outline: none;
-            border: none;
+.btn-house{
+  position: fixed;
+  left: 367px;
+  top: 170px;
+  z-index:1;
 }
-.btn-python {
-            background-image: url('squaredpython.png');
-            background-color: transparent !important;
-            background-size: cover;
-            width: 40px;
-            height: 40px;
-            outline: none;
-            border: none;
-}
-.btn-swift {
-            background-image: url('swiftsquared.png');
-            background-color: transparent !important;
-            background-size: cover;
-            width: 40px;
-            height: 40px;
-            outline: none;
-            border: none;
+.btn-hotel{
+  position: fixed;
+  left: 367px;
+  top: 230px;
+  z-index:1;
 }
 /* toggle button */
 /* The switch - the box around the slider */
@@ -349,11 +330,6 @@ background: #232323;
 
 
 /* BOARD */
-canvas{
-	/*border:1px solid #000000;*/
-
-}
-
 #board{
 	padding: 0;
 	display: block;
@@ -366,6 +342,7 @@ canvas{
 .outsideWrapper{
     width:570px;
     height:570px;
+    position: relative;
     margin:50%;
 }
 
@@ -373,6 +350,7 @@ canvas{
     width:100%;
     height:100%;
     position:relative;
+
 }
 
 .coveredImage{
@@ -380,7 +358,8 @@ canvas{
     height:100%;
     position:absolute;
 	top:0px;
-	left:0px;
+	/* left:-150px; */
+  left: 0px;
 }
 
 .coveringCanvas{
@@ -388,8 +367,8 @@ canvas{
     height:100%;
     position:absolute;
     top:0px;
-    left:0px;
-    /*background-color: rgba(255,0,0,.1);*/
+    left: 0px;
+
 }
 
 
@@ -457,6 +436,45 @@ canvas{
 	text-decoration:none;
 }
 
+#alertBox #closeBtn1 {
+	display:inline-grid;
+	position:relative;
+	margin:10px auto;
+	padding:10px;
+	border:0 none;
+  border:4px;
+	width:70px;
+	font:0.6em Courier,arial;
+	text-transform:uppercase;
+	text-align:center;
+	color: white;
+	/* background-color:#a2ad9c; */
+  background-color:#6C7C59;
+  border-color: #6C7C59;
+	border-radius: 3px;
+  outline: none;
+	text-decoration:none;
+}
+#alertBox #closeBtn2 {
+	display:inline-grid;
+	position:relative;
+	margin:10px auto;
+	padding:10px;
+	border:0 none;
+  border:40px;
+	width:70px;
+	font:0.6em Courier,arial;
+	text-transform:uppercase;
+	text-align:center;
+	color: white;
+	/* background-color:#a2ad9c; */
+  background-color:#6C7C59;
+  border-color: #6C7C59;
+	border-radius: 3px;
+  outline: none;
+	text-decoration:none;
+}
+
 /* unrelated styles */
 
 #mContainer {
@@ -489,4 +507,754 @@ canvas{
 /* CHECKED STYLES */
 .test [type=radio]:checked + img {
   outline: 2px solid white;
+}
+
+/* MUSIC */
+#player-container #play-pause {
+  cursor: pointer;
+  text-indent: -999999px;
+  height:40px;
+  width: 40px;
+  background-color: transparent !important;
+  background-image: url('play.png');
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:20px;
+  position: fixed;
+  left: 85px;
+  top: 26px;
+}
+.play {
+  background-image: url('play.png');
+  background-size: 50px 50px;
+}
+.pause {
+   background-image: url('pause.png')!important;
+}
+
+/* DICE  */
+* {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+.mainDiv {
+  background-color: #CAD9B5 ;
+  /* display: inline-block; */
+  height: 100%;
+  width: 100%;
+}
+.btn-dice{
+  position: fixed;
+  top: 230px;
+  left: 95px;
+}
+.btn-dice:hover {
+  cursor: pointer;
+}
+/* body {
+  overflow: hidden;
+} */
+.dice1 {
+  align-items: center;
+  display: inline-block;
+  /* padding-left: 210px; */
+  position: fixed;
+  top: 20px;
+  left: 100px;
+  padding-left: 0px;
+  padding-top: 80px;
+  perspective: 600px;
+}
+.dice2 {
+  align-items: center;
+  display: inline-block;
+  position: fixed;
+  top: 105px;
+  left: 220px;
+  padding-left: 0px;
+  padding-right:80px;
+  perspective: 600px;
+}
+.die-list1 {
+  height: 6rem;
+  list-style-type: none;
+  position: relative;
+  transform-style: preserve-3d;
+  width: 6rem;
+}
+.die-list2 {
+  height: 6rem;
+  list-style-type: none;
+  position: relative;
+  transform-style: preserve-3d;
+  width: 6rem;
+}
+.even-roll {
+  transition: transform 1.25s ease-out;
+}
+.odd-roll {
+  transition: transform 1.25s ease-out;
+}
+.die-item1 {
+  background-color: black;
+  border-radius:25px;
+  box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
+    inset 0.5rem -0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+  display: grid;
+  grid-template-areas: "one two three" "four five six" "seven eight nine";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  height: 100%;
+  padding: 1rem;
+  position: absolute;
+  width: 100%;
+}
+.die-item2 {
+  background-color: black;
+  border-radius:25px;
+  box-shadow: inset -0.35rem 0.35rem 0.75rem rgba(0, 0, 0, 0.3),
+    inset 0.5rem -0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+  display: grid;
+  grid-template-areas: "one two three" "four five six" "seven eight nine";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  height: 100%;
+  padding: 1rem;
+  position: absolute;
+  width: 100%;
+}
+.hide-side1{
+  display:none;
+}
+.hide-side2{
+  display:none;
+}
+
+.dot {
+  align-self: center;
+  background-color: #f0f0f5;
+  border-radius: 50%;
+  box-shadow: inset -0.15rem 0.15rem 0.25rem rgba(0, 0, 0, 0.5);
+  display: block;
+  height: 1.25rem;
+  justify-self: center;
+  width: 1.25rem;
+}
+.even-roll[data-roll="1"] {
+  transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
+}
+.even-roll[data-roll="2"] {
+  transform: rotateX(450deg) rotateY(720deg) rotateZ(360deg);
+}
+.even-roll[data-roll="3"] {
+  transform: rotateX(360deg) rotateY(630deg) rotateZ(360deg);
+}
+.even-roll[data-roll="4"] {
+  transform: rotateX(360deg) rotateY(810deg) rotateZ(360deg);
+}
+.even-roll[data-roll="5"] {
+  transform: rotateX(270deg) rotateY(720deg) rotateZ(360deg);
+}
+.even-roll[data-roll="6"] {
+  transform: rotateX(360deg) rotateY(900deg) rotateZ(360deg);
+}
+.odd-roll[data-roll="1"] {
+  transform: rotateX(-360deg) rotateY(-720deg) rotateZ(-360deg);
+}
+.odd-roll[data-roll="2"] {
+  transform: rotateX(-270deg) rotateY(-720deg) rotateZ(-360deg);
+}
+.odd-roll[data-roll="3"] {
+  transform: rotateX(-360deg) rotateY(-810deg) rotateZ(-360deg);
+}
+.odd-roll[data-roll="4"] {
+  transform: rotateX(-360deg) rotateY(-630deg) rotateZ(-360deg);
+}
+.odd-roll[data-roll="5"] {
+  transform: rotateX(-450deg) rotateY(-720deg) rotateZ(-360deg);
+}
+.odd-roll[data-roll="6"] {
+  transform: rotateX(-360deg) rotateY(-900deg) rotateZ(-360deg);
+}
+[data-side="1"] {
+  transform: rotate3d(0, 0, 0, 90deg) translateZ(4rem);
+}
+[data-side="2"] {
+  transform: rotate3d(-1, 0, 0, 90deg) translateZ(4rem);
+}
+[data-side="3"] {
+  transform: rotate3d(0, 1, 0, 90deg) translateZ(4rem);
+}
+[data-side="4"] {
+  transform: rotate3d(0, -1, 0, 90deg) translateZ(4rem);
+}
+[data-side="5"] {
+  transform: rotate3d(1, 0, 0, 90deg) translateZ(4rem);
+}
+[data-side="6"] {
+  transform: rotate3d(1, 0, 0, 180deg) translateZ(4rem);
+}
+[data-side="1"] .dot:nth-of-type(1) {
+  grid-area: five;
+}
+[data-side="2"] .dot:nth-of-type(1) {
+  grid-area: one;
+}
+[data-side="2"] .dot:nth-of-type(2) {
+  grid-area: nine;
+}
+[data-side="3"] .dot:nth-of-type(1) {
+  grid-area: one;
+}
+[data-side="3"] .dot:nth-of-type(2) {
+  grid-area: five;
+}
+[data-side="3"] .dot:nth-of-type(3) {
+  grid-area: nine;
+}
+[data-side="4"] .dot:nth-of-type(1) {
+  grid-area: one;
+}
+[data-side="4"] .dot:nth-of-type(2) {
+  grid-area: three;
+}
+[data-side="4"] .dot:nth-of-type(3) {
+  grid-area: seven;
+}
+[data-side="4"] .dot:nth-of-type(4) {
+  grid-area: nine;
+}
+[data-side="5"] .dot:nth-of-type(1) {
+  grid-area: one;
+}
+[data-side="5"] .dot:nth-of-type(2) {
+  grid-area: three;
+}
+[data-side="5"] .dot:nth-of-type(3) {
+  grid-area: five;
+}
+[data-side="5"] .dot:nth-of-type(4) {
+  grid-area: seven;
+}
+[data-side="5"] .dot:nth-of-type(5) {
+  grid-area: nine;
+}
+[data-side="6"] .dot:nth-of-type(1) {
+  grid-area: one;
+}
+[data-side="6"] .dot:nth-of-type(2) {
+  grid-area: three;
+}
+[data-side="6"] .dot:nth-of-type(3) {
+  grid-area: four;
+}
+[data-side="6"] .dot:nth-of-type(4) {
+  grid-area: six;
+}
+[data-side="6"] .dot:nth-of-type(5) {
+  grid-area: seven;
+}
+[data-side="6"] .dot:nth-of-type(6) {
+  grid-area: nine;
+}
+/* MODAL */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* TEST */
+
+p {
+  margin: 1px 0;
+}
+.card9 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 70px;
+  z-index:0;
+  transition: 1s all ease;
+}
+.card8 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 118px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card6 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 214px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card7 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 166px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card5 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 262px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card4 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 310px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card3 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 358px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card2 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 406px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card1 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 454px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card0 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card10 {
+  /* width: 250px; */
+  background-color: transparent !important;
+  position: absolute;
+  top: 497px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card11 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 448px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card12 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 400px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card13 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 352px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card14 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 304px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card15 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 256px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card16 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 208px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card17 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 160px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card18 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 112px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card19 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 64px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card20 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 1px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card21 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 69px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card22 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 117px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card23 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 166px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card24 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 214px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card25 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 262px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card26 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 310px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card27 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 358px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card28 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 406px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card29 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 454px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card30 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: -4px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card31 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 64px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card32 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 113px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card33 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 161px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card34 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 209px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card35 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 257px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card36 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 305px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card37 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 353px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card38 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 401px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.card39 {
+  width: 250px;
+  background-color: transparent !important;
+  position: absolute;
+  top: 449px;
+  left: 502px;
+  z-index:1;
+  transition: 1s all ease;
+}
+.propertys {
+  height: 67px;
+  width: 67px;
+  cursor: pointer;
+  outline: none;
+  transition: 1s all ease;
+}
+.propertyh {
+  height: 47px;
+  width: 67px;
+  cursor: pointer;
+  outline: none;
+  transition: 1s all ease;
+}
+.propertyv {
+  height: 67px;
+  width: 47px;
+  cursor: pointer;
+  outline: none;
+  transition: 1s all ease;
+}
+.propertyspecial {
+  height: 67px;
+  width: 67px;
+  cursor: pointer;
+  outline: none;
+  transition: 1s all ease;
+}
+
+.transparent { background-color: transparent; }
+.lightblue { background: #c1dced; }
+
+.eyebrow {
+  display: block;
+  font-size: 14px
+  letter-spacing: 4px;
+  margin-bottom: 5px;
+    background-color: white !important;
+}
+
+::-webkit-details-marker {
+  display: none;
+  background-color: #DCDCDC !important;
+  margin: 1px 0;
+}
+
+.rent {
+  text-transform: uppercase;
+  margin-top: 10px;
+  background-color: #D3D3D3 !important;
+  margin: 1px 0;
+}
+
+.priceTable {
+  width: 100%;
+  background-color: #D3D3D3 !important;
+  display: run-in;
+  flex-wrap: wrap;
+}
+
+.priceTable .qty,
+.priceTable .price {
+  width: 100%;
+  background-color: #DCDCDC !important;
+  /* margin: 1px 0; */
+
+}
+
+.priceTable .qty {
+  text-align: left;
+  background-color: #DCDCDC !important;
+
+}
+
+.priceTable .price {
+  text-align: right;
+  background-color: #DCDCDC !important;
+  margin: 1px 0;
+}
+
+.hotel {
+  margin-top: -1px;
+  background-color: #DCDCDC !important;
+  margin: 1px 0;
+}
+.houses {
+  margin-top: -1px;
+  background-color: #DCDCDC !important;
+  margin: 1px 0;
+}
+.hotelCost {
+  margin-top: -1px;
+  background-color: #DCDCDC !important;
+  margin: 1px 0;
 }

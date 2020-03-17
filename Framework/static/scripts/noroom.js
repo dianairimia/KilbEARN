@@ -7,6 +7,11 @@ function added() {
     alert('4 players only <br> Click PLAY');
 }
 
+function sendNumberPlayers(){
+
+}
+
+// BUTTON
 var ALERT_TITLE = ":(";
 var ALERT_BUTTON_TEXT = "OK";
 
