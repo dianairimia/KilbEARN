@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -14,14 +15,15 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
     crossorigin="anonymous">
 
+
     <!-- Custom styles for this template -->
-    <link href="loginregister.css" rel="stylesheet">
-    <script src="noroom.js"></script>
+    <link rel="stylesheet" href="{% static "css/loginregister.css" %}"/>
+    <script src="{% static 'scripts/noroom.js' %}"></script>
   </head>
 
   <body class="text-center">
-    <form class="form-signin">
-
+<form class="form-signin" method=POST>
+      {% csrf_token %}
       <div class="container">
         <div class="row top-buffer">
           <div class="col">
@@ -36,57 +38,59 @@
 
     <h1 class="h3 mb-3 font-weight-normal">Add Players</h1>
     <label for="inputName" class="sr-only"></label>
-    <input type="name" id="inputName" class="form-control"
+    <input type="name" name="Name" id="inputName" class="form-control"
     placeholder="Name" required autofocus>
     <br>
     <h3 class="h3 mb-3 font-weight-normal">Select Your Icon</h3>
 
     <div class="container">
       <div class="row top-buffer">
-        <form>
         <label class="test">
-        <input type="radio" name="icon" value="small">
-        <img src="c++squared.png" width="40" height="40" />
+        <input type="radio" name="icon" value="C++">
+        <img src="{% static 'images/c++squared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="big">
-        <img src="Cshsquared.png" width="40" height="40" />
+        <input type="radio" name="icon" value="C Sharp">
+        <img src="{% static 'images/Cshsquared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="small">
-        <img src="haskellsquared.png" width="40" height="40" />
+        <input type="radio" name="icon" value="Haskell">
+        <img src="{% static 'images/haskellsquared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="small" >
-        <img src="jssquared.png" width="40" height="40" />
+        <input type="radio" name="icon" value="JS" >
+        <img src="{% static 'images/jssquared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="small" >
-        <img src="rubysquared.png" width="40" height="40" />
+        <input type="radio" name="icon" value="Ruby" >
+        <img src="{% static 'images/rubysquared.png' %}"width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="small" >
-        <img src="squaredpython.png" width="40" height="40" />
+        <input type="radio" name="icon" value="Python" >
+        <img src="{% static 'images/squaredpython.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
-        <input type="radio" name="icon" value="small" >
-        <img src="swiftsquared.png" width="40" height="40" />
+        <input type="radio" name="icon" value="Swift" >
+        <img src="{% static 'images/swiftsquared.png' %}" width="40" height="40" />
         </label>
-      </form>
-      </div>
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value='Add Player'>
+        </div>
+
+
 
       <br>
 
       <div class="row top-buffer">
-          <a class="btn btn-secondary btn-lg btn-block" s href="#.href" type="button">Add Player</a>
-          <a class="btn btn-secondary btn-lg btn-block" onclick="sendNumberPlayers()"href="board.html">SAVE & PLAY</a>
-          
+      <input type="submit" name="sendNumberPlayer" class="btn btn-primary btn-lg btn-block" value='Save & Continue'>
+</form>
+
+      <!--<input type="submit" class="btn btn-primary btn-lg btn-block" value='SAVE & CONTINUE'>-->
       </div>
 
       <div class="row top-buffer">
@@ -94,6 +98,6 @@
       </div>
 
     </div>
-    </form>
+
   </body>
 </html>

@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>No room</title>
+    <title>Computer</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -15,8 +16,8 @@
     crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="loginregister.css" rel="stylesheet">
-    <script src="noroom.js"></script>
+    <link rel="stylesheet" href="{% static "css/loginregister.css" %}"/>
+    <script src="{% static 'scripts/noroom.js' %}"></script>
   </head>
 
   <body class="text-center">
@@ -46,37 +47,37 @@
         <form>
         <label class="test">
         <input type="radio" name="icon" value="small">
-        <img src="c++squared.png" width="40" height="40" />
+        <img src="{% static 'images/c++squared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
         <input type="radio" name="icon" value="big">
-        <img src="Cshsquared.png" width="40" height="40" />
+        <img src="{% static 'images/Cshsquared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
         <input type="radio" name="icon" value="small">
-        <img src="haskellsquared.png" width="40" height="40" />
+        <img src="{% static 'images/haskellsquared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
         <input type="radio" name="icon" value="small" >
-        <img src="jssquared.png" width="40" height="40" />
+        <img src="{% static 'images/jssquared.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
         <input type="radio" name="icon" value="small" >
-        <img src="rubysquared.png" width="40" height="40" />
+        <img src="{% static 'images/rubysquared.png' %}"width="40" height="40" />
         </label>
 
         <label class="test">
         <input type="radio" name="icon" value="small" >
-        <img src="squaredpython.png" width="40" height="40" />
+        <img src="{% static 'images/squaredpython.png' %}" width="40" height="40" />
         </label>
 
         <label class="test">
         <input type="radio" name="icon" value="small" >
-        <img src="swiftsquared.png" width="40" height="40" />
+        <img src="{% static 'images/swiftsquared.png' %}" width="40" height="40" />
         </label>
       </form>
       </div>
@@ -84,9 +85,8 @@
       <br>
 
       <div class="row top-buffer">
-          <a class="btn btn-secondary btn-lg btn-block" s href="#.href" type="button">Add Player</a>
-          <a class="btn btn-secondary btn-lg btn-block" onclick="sendNumberPlayers()"href="board.html">SAVE & PLAY</a>
-          
+          <a class="btn btn-secondary btn-lg btn-block" href="#.href" type="button">Add Player</a>
+          <a class="btn btn-secondary btn-lg btn-block" href="board.html">SAVE & PLAY</a>
       </div>
 
       <div class="row top-buffer">
