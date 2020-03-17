@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+    shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>No room</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="loginregister.css" rel="stylesheet">
+    <script src="noroom.js"></script>
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin">
+
+      <div class="container">
+        <div class="row top-buffer">
+          <div class="col">
+          <a class="btn btn-secondary btn-sm" href="profile.html" role="button">Profile</a>
+          </div>
+          <div class="col-6">
+          <a class="btn btn-secondary btn-sm" href="settings.html" role="button">Settings</a>
+          </div>
+        </div>
+      </div>
+      <br>
+
+    <h1 class="h3 mb-3 font-weight-normal">Add Players</h1>
+    <label for="inputName" class="sr-only"></label>
+    <input type="name" id="inputName" class="form-control"
+    placeholder="Name" required autofocus>
+    <br>
+    <h3 class="h3 mb-3 font-weight-normal">Select Your Icon</h3>
+
+    <div class="container">
+      <div class="row top-buffer">
+        <form>
+        <label class="test">
+        <input type="radio" name="icon" value="small">
+        <img src="c++squared.png" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="big">
+        <img src="Cshsquared.png" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small">
+        <img src="haskellsquared.png" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="jssquared.png" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="rubysquared.png" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="squaredpython.png" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="small" >
+        <img src="swiftsquared.png" width="40" height="40" />
+        </label>
+      </form>
+      </div>
+
+      <br>
+
+      <div class="row top-buffer">
+          <a class="btn btn-secondary btn-lg btn-block" onclick="added()" href="#.href" type="button">Add Player</a>
+          <a class="btn btn-secondary btn-lg btn-block" onclick="sendNumberPlayers()"href="board.html">SAVE & PLAY</a>
+      </div>
+
+      <div class="row top-buffer">
+        <a class="btn btn-secondary btn-lg btn-block" href="play.html" role="button">Back</a>
+      </div>
+
+    </div>
+    </form>
+  </body>
+</html>
