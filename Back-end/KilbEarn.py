@@ -10,7 +10,7 @@ def pay(player, amount, optionality):
 
 
     #global variables
-    global player_money, skip, hotels_location, houses_location, location, location_price, no_remaining_player, paid_test
+    global player_money, skip, houses_location, location, location_price, no_remaining_player, paid_test
 
 
 
@@ -37,15 +37,12 @@ def pay(player, amount, optionality):
 
                 #note: when we sell something, we get half(1/2) the money we spent on it
 
-                #we calculate how much the hotels are worth
-                if hotels_location[i] == 1:
-                    properties_value = properties_value + location_price[i]
-                    #the prices of 4 houses + a hotel is location_price[i] * 2
 
-                #we calculate how much the houses are worth
+                #we calculate how much the houses & hotels are worth
                 if houses_location[i] > 0:
                     properties_value = properties_value + (location_price[i]*2/5)/2 * houses_location[i]
                     #the price of a house is locarion_price[i] * 2/5
+                    # the prices of 4 houses + a hotel is location_price[i] * 2
 
 
                 # we calculate how much the locations are worth
@@ -63,7 +60,6 @@ def pay(player, amount, optionality):
 
             for i in range(40):
                 if location[i] == player + 1:
-                    hotels_location[i] = 0
                     houses_location[i] = 0
                     location[i] = 0
 
@@ -78,11 +74,11 @@ def pay(player, amount, optionality):
                 if answer[0] == 'y':
                     where = input("From which location do you want to sell it?[insert the number(0-39)]")
                     where = int(where)
-                    if hotels_location[where] == 0 or location[where] != player + 1:
+                    if houses_location[where] != 5 or location[where] != player + 1:
                         print("You don't own a hotel on that location!!!")
                     else:
                         player_money[player] = player_money[player] + location_price[where]
-                        hotels_location[where] = 0
+                        houses_location[where] = 0
 
                 answer = input("Do you want o sell some houses?[y/n]")
                 if answer[0] == 'y':
@@ -139,14 +135,6 @@ def mitigating_circumstances(player):
         player_location[player] = 27
         if location[27]==0:
             check_ownable_locations(27, player)
-        #if(location[27]==0):
-            #answer = input("Do you want to buy this location? [y/n]")
-            #if answer[0] == 'y':
-                #check_pay = player_money[player]
-                #pay(player, location_price[27], 1)
-                #we check if the player afforded to pay for the location
-                #if (check_pay > player_money[player]):
-                    #location[27] = player + 1
 
 
 
@@ -251,7 +239,6 @@ def deadlines(player):
     global eduroam_money
     global player_money
     global player_location
-    global hotels_location
     global houses_location
     global location_price
     global paid_test
@@ -356,7 +343,7 @@ def deadlines(player):
         if location[26]>0:
             if location[6] != player + 1 and location[6] <= 6:
                 # player pays the rent
-                if hotels_location[6] == 1:
+                if houses_location[6] == 5:
                     rent = 5 * location_price[6]
                 elif houses_location[6] == 4:
                     rent = 4 * location_price[6]
@@ -390,7 +377,7 @@ def check_ownable_locations(checked_location, player):
 
 
     #global variables
-    global location, player_money, location_price, server_counter, hotels_location, houses_location, utilities_counter, dice_value, paid_test
+    global location, player_money, location_price, server_counter, houses_location, utilities_counter, dice_value, paid_test
 
 
 
@@ -401,7 +388,7 @@ def check_ownable_locations(checked_location, player):
         #this means that the location is owned by somebody else
         if location[checked_location] != player + 1 and location[checked_location] <= 6:
             # player pays the rent
-            if hotels_location[checked_location] == 1:
+            if houses_location[checked_location] == 5:
                 rent = 5 * location_price[checked_location]
             elif houses_location[checked_location] == 4:
                 rent = 4 * location_price[checked_location]
@@ -475,7 +462,7 @@ def check_ownable_locations(checked_location, player):
 #player is from 0-5
 def buy_houses(player):
 
-    global location, houses_location, player_money, location_price, hotels_location, paid_test
+    global location, houses_location, player_money, location_price, paid_test
 
 
     #buying houses
@@ -522,22 +509,16 @@ def buy_houses(player):
                 answer1 = int(answer1)
 
             # now let's check if the hotel can actually be placed there
-            if(houses_location[answer1] != 4 or hotels_location[answer1] != 0):
+            if(houses_location[answer1] != 4 or houses_location[answer1] == 5):
                 print("You can't place a hotel here!!!")
 
             paid_test = 1
             pay(player, location_price[answer1] * 2, 1)
             if (paid_test == 0):
-                houses_location[answer1] = 0
-                hotels_location[answer1] = 1
+                houses_location[answer1] = 5
             else:
                 print("You don't have enough money!!!")
 
-
-    #Carla's work
-    #if(buy):
-        #global money = money - location_price * 0.25 # the player pays for the house
-        #global house_location[location]++; # the number of houses on that location increases
 
 
 
@@ -566,15 +547,6 @@ def checkskip(player):
 
     #if skip = 2 we don't do anything cause the player lost and there is nothing we can 'bout that
 
-
-
-    #Carla's code
-
-    #if(skip == 1): # skip =1 when the player is in the tutors room
-            #if(escape ==2):# check for escape card from prison: if =2 then the player wants to use it
-                #skip ==0
-    #if(skip == 2): # check if the player lost so that it is skipped each round until the end of the game
-            #player = player +1    # moves to the next player
 
 
 
@@ -673,14 +645,10 @@ def main():
     skip = []                           #this list tells use which players are in prison or lost
                                         #(indicies: 0-5)
                                         #(values; 0->he is not skipped, 1->he is in tutors room, 2->he lost)
-    global hotels_location
-    hotels_location = []                #this list tells us if there are hotels on a property
-                                        #(indicies: 0-39)
-                                        #(values: 0-> no hotel here, 1-> hotel here)
     global houses_location
     houses_location = []                #this list tells us how many houses are on a property
                                         #(indicies: 0-39)
-                                        #(values: 0-> no houses here, i-> i houses here)
+                                        #(values: 0-> no houses here, if i < 5 -> i houses here, if i==5 hotel here)
     global player_location
     player_location = []                #this list tells us where each player is
                                         #(indicies: 0-5)
@@ -708,13 +676,12 @@ def main():
     paid_test = 0                      #this variable tells us if a payment was made succesfully or not
 
 
-    #MAIN program starts here
+    #ACTUAL MAIN program starts here
 
 
     #initialising the board
     for i in range (40):
         houses_location.append(0)
-        hotels_location.append(0)
         #this is just a place holder for now...
         # we are going to introduce each locations price
         location_price.append(0)
@@ -852,34 +819,3 @@ def main():
 
 main()
 
-
-
-
-
-
-
-
-
-
-
-#these are just gonna be some checks for check_ownable_locations()
-
-#location.append(1)
-#location.append(0)
-
-#check_ownable_locations(0, 1)
-
-#player_money.append(0)
-#player_money.append(0)
-#player_money.append(1500)
-#location_price.append(250)
-#check_ownable_locations(0, 2)
-#print(player_money[2])
-
-#location_price.append(250)
-#location_price.append(350)
-#player_money.append(0)
-#player_money.append(1500)
-#check_ownable_locations(1, 1)
-#print(player_money[1])
-#print(location[1])
