@@ -33,7 +33,7 @@ def pay(player, amount, optionality):
 
 
             #if the player owns a location, we calculate how much he would get for selling everything on it
-            if location[i] == player + 1:
+            if location[i] == player + 1 or location[i] == player + 7 or location[i] == player + 13:
 
                 #note: when we sell something, we get half(1/2) the money we spent on it
 
@@ -92,14 +92,17 @@ def pay(player, amount, optionality):
                         #for now I'm ignoring that you have to also sell houses from locations...
                         #...with the same color, I'll get back to this in the nearby future.......
                         #also ignoring that you maaaaaay insert too many houses, oooops....
-                        player_money[player] = player_money[player] + (location_price[where]*2/5)/2 * number_houses
-                        houses_location[where] = houses_location[where] - number_houses
+                        if number_houses > houses_location[where]:
+                            print("You inserted too many houses!!!")
+                        else:
+                            player_money[player] = player_money[player] + (location_price[where]*2/5)/2 * number_houses
+                            houses_location[where] = houses_location[where] - number_houses
 
                 answer = input("Do you want o sell a location?[y/n]")
                 if answer[0] == 'y':
                     where = input("Which location do you want to sell?[insert the number(0-39)]")
                     where = int(where)
-                    if location[where] != player + 1:
+                    if location[where] != player + 1 or location[where] != player + 7 or location[where] != player + 13:
                         print("You don't own that location!!!")
                     else:
                         player_money[player] = player_money[player] + location_price[where] / 2
@@ -118,7 +121,7 @@ def mitigating_circumstances(player):
     global eduroam_money
     global location_price
     global location
-    global skips
+    global skip
     global paid_test
 
 
@@ -140,8 +143,8 @@ def mitigating_circumstances(player):
 
     if m ==3: # You have been elected the chair of the tutorials for the rest of the semester. Collect k 25 from each player.
         print("You have been elected the chair of the tutorials for the rest of the semester. Collect k 25 from each player.")
-        for i in range(no_remaining_player):
-            if skip[i] != 2 and i!= player:
+        for i in range(no_player):
+            if skip[i] != 2 and i != player:
                 paid_test = 1   # player didnt pay
                 initial_money = player_money[i]
                 pay(i, 25, 0)
@@ -158,7 +161,7 @@ def mitigating_circumstances(player):
         player_location[player] = 10
         skip[player] = 1
 
-    if m == 5: # Advance token to nearest the server2. If unowned, you may buy it from the Bank. If owned, pay owner a total 10 times the amount thrown.
+    if m == 5: # Advance token to nearest server. If unowned, you may buy it from the Bank. If owned, pay owner a total 10 times the amount thrown.
         print("Advance token to nearest Server. If unowned, you may buy it from the Bank. If owned, pay owner a total 10 times the amount thrown.")
         if player_location[player] >=0 and player_location[player]<5:
             player_location[player] = 5
@@ -180,14 +183,9 @@ def mitigating_circumstances(player):
             loc = 5
             player_money[player] += 200
 
-        if location[player]>0:
+        if location[player_location[player]]>0:
             ### roll dice -- pay 10 times the amount thrown
-            if location[loc] <=6 and location[loc]>=1:
-                owner = location[loc]-1
-            elif location[loc] <=12 and location[loc] >=7:
-                owner = location[loc] - 7
-            elif location[loc]<=18 and location[loc]>=13:
-                owner = location[loc] - 13
+            owner = location[player_location[player]] - 7
             print("Roll dice again")
             x= random.randint(1,6)
             y = random.randint(1,6)
@@ -198,7 +196,7 @@ def mitigating_circumstances(player):
             if paid_test == 0:
                 player_money[owner] += 10*(x+y)
             else:
-                player_money[player] += initial_money
+                player_money[owner] += initial_money
         else:
             check_ownable_locations(loc, player)
 
@@ -224,8 +222,8 @@ def mitigating_circumstances(player):
             eduroam_money += initial_money
 
 
-    if m==9:# Unfortunately, you were not able to sit the exams. Go to Startx. Do not collect k200.
-        print("Unfortunately, you were not able to sit the exams. Go to Startx. Do not collect k200.")
+    if m==9:# Unfortunately, you were not able to sit the exams. Go to Startx. Do not collect k400.
+        print("Unfortunately, you were not able to sit the exams. Go to Startx. Do not collect k400.")
         player_location[player] = 0
 
     if m==10: #Advance to the Lecture Theatre 1.2. If you pass through Startx do not collect k200. If owned, you do not have to pay the rent. If unowned, you may buy it from the Bank.
@@ -312,8 +310,8 @@ def deadlines(player):
 
     if d==8: #You need to give your final presentation. Pay each player k 25.
         print("You need to give your final presentation. Pay each player k 25.")
-        for i in range(0, no_remaining_player):
-            if player != i:
+        for i in range(0, no_player):
+            if player != i and skip[i] != 2:
                 paid_test = 1   # player didnt pay
                 initial_money = player_money[player]
                 pay(player, 25, 0)
@@ -361,7 +359,7 @@ def deadlines(player):
                 initial_money = player_money[player]
                 pay(player, 2 * rent, 0)
                 if (paid_test == 0):
-                    player_money[location[6] - 1] = player_money[location[6] - 1] + 2* location_price[6]
+                    player_money[location[6] - 1] = player_money[location[6] - 1] + 2* rent
                 else:
                     player_money[location[6] - 1] = player_money[location[6] - 1] + initial_money
 
@@ -406,7 +404,7 @@ def check_ownable_locations(checked_location, player):
             initial_money = player_money[player]
             pay(player, rent, 0)
             if (paid_test == 0):
-                player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + location_price[checked_location]
+                player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + rent
             else:
                 player_money[location[checked_location] - 1] = player_money[location[checked_location] - 1] + initial_money
         elif location[checked_location] > 6 and location[checked_location] <= 12 and location[checked_location] != player + 7:
@@ -511,13 +509,13 @@ def buy_houses(player):
             # now let's check if the hotel can actually be placed there
             if(houses_location[answer1] != 4 or houses_location[answer1] == 5):
                 print("You can't place a hotel here!!!")
-
-            paid_test = 1
-            pay(player, location_price[answer1] * 2, 1)
-            if (paid_test == 0):
-                houses_location[answer1] = 5
             else:
-                print("You don't have enough money!!!")
+                paid_test = 1
+                pay(player, location_price[answer1] * 2/5, 1)
+                if (paid_test == 0):
+                    houses_location[answer1] = 5
+                else:
+                    print("You don't have enough money!!!")
 
 
 
@@ -542,7 +540,7 @@ def checkskip(player):
         pay(player, 50, 0)
         if(paid_test == 0):
             skip[player] = 0
-            print("You got out of prison!")
+            print("You paid 50k and got out of prison!")
 
 
     #if skip = 2 we don't do anything cause the player lost and there is nothing we can 'bout that
@@ -585,7 +583,7 @@ def check_place(player):
     elif(location[check_location] == -2):
         mitigating_circumstances(player)
 
-    #stuff to pay(vending machine, rent, tuition fees, microwave)
+    #stuff to pay(rent, tuition fees)
     elif(location[check_location] == -3):
         paid_test = 1
         initial_money = player_money[player]
@@ -615,6 +613,15 @@ def check_place(player):
     #ownable location...
     elif (location[check_location] >= 0):
         check_ownable_locations(check_location, player)
+
+
+
+#a function for rolling the dice
+def dice_roll():
+    global dice1, dice2, dice_value
+    dice1 = random.randint(1, 6)
+    dice2 = random.randint(1, 6)
+    dice_value = dice1 + dice2
 
 
 
@@ -674,6 +681,9 @@ def main():
     dice_value = 0                      #this variable tells us how much a player rolled
     global paid_test
     paid_test = 0                      #this variable tells us if a payment was made succesfully or not
+    global dice1, dice2
+    dice1 = 0
+    dice2 = 0                           #these are the 2 values for the 2 dice
 
 
     #ACTUAL MAIN program starts here
@@ -760,6 +770,7 @@ def main():
         player_escape.append(0)
         #each player starts with 0 servers
         server_counter.append(0)
+        # each player starts with 0 utilities
         utilities_counter.append(0)
 
 
@@ -783,9 +794,7 @@ def main():
             else:
                 buy_houses(player_turn)
                 #now the dice roll for the players
-                dice1 = random.randint(1, 6)
-                dice2 = random.randint(1, 6)
-                dice_value = dice1 + dice2
+                dice_roll()
                 print("You rolled " + str(dice1) + " with " + str(dice2))
                 roll_counter = 1
                 move_player(player_turn, dice_value)
@@ -794,14 +803,13 @@ def main():
                 check_place(player_turn)
                 print("You landed on " + str(player_location[player_turn]))
                 print("You have " + str(player_money[player_turn]) + " money!")
-                while dice1 == dice2 and roll_counter < 4 and skip == 0:
-                    dice1 = random.randint(1, 6)
-                    dice2 = random.randint(1, 6)
-                    dice_value = dice1 + dice2
+                while dice1 == dice2 and roll_counter < 4 and skip[player_turn] == 0:
+                    print("You rolled a double!")
+                    dice_roll()
                     print("You rolled " + str(dice1) + " with " + str(dice2))
                     roll_counter = roll_counter + 1
                     if dice1 == dice2 and roll_counter == 3:
-                        skip = 1
+                        skip[player_turn] = 1
                         player_location[player_turn] = 10
                     else:
                         move_player(player_turn, dice_value)
