@@ -1,5 +1,4 @@
 <!doctype html>
-{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -16,7 +15,7 @@
     crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="{% static "css/loginregister.css" %}"/>
+    <link href="loginregister.css" rel="stylesheet">
   </head>
 
   <body class="text-center">
@@ -36,11 +35,10 @@
       <h1 class="h3 mb-3 font-weight-normal">PLAY MODES</h1>
 
 
-       <a class="btn btn-secondary btn-lg btn-block" href="#.html" onclick="alert('KilbEARN 2.0 <br> work in progress');" role="button">Computer</a>
+       <a class="btn btn-secondary btn-lg btn-block" href="computer.html" role="button">Computer</a>
        <a class="btn btn-secondary btn-lg btn-block" href="people.html" role="button">People</a>
 
-        <a class="btn btn-secondary btn-lg btn-block" href="mainmenu.html" role="button">Back</a>
+      <button type="button" class="btn btn-secondary btn-sm btn-block" href="mainmenu.html">Back</button>
       </form>
-
   </body>
 </html>

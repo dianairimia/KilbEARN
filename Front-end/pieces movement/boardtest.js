@@ -17,18 +17,20 @@ for (i = 0; i < getNumberOfPlayers(); i++){
 var ownedPlace = new Array(40);
 var ownedPlaceWidth = new Array(40);
 var ownedPlaceHeight = new Array(40);
-var housesPerProperty = new Array(40);
+var hausesPerProperty = new Array(40);
+
 for (i = 0; i<40; i++){
   ownedPlace[i] = new Image();
   ownedPlace[i].src = '';
   ownedPlaceHeight[i] = 0;
   ownedPlaceWidth[i] = 0;
-  housesPerProperty[i] = 0;
+  hausesPerProperty[i] = 0;
 }
-var house = new Image();
-house.src = 'normalHouse.png';
+var hause = new Image();
+hause.src = 'normalHause.png';
 var hotel = new Image();
-hotel.src = 'fancyHouse.png';
+hotel.src = 'fancyHause.png';
+
 
 //DIANA this is the main function -> get the backend to give in which are the files instead of me writing them (you can make it for cycle if it's easier)
 function init() {
@@ -144,7 +146,245 @@ function ownedPlaceHeightCalculate(square){
 
 }
 
+function hotelWidthCalculate(square){
+  var width = 1;
+  if((square > 9) && (square < 21)){
+    return width;
+  }
+  if((square == 0) || ((square < 40) && (square > 29))){
+    width = 450;
+    return width;
+  }
 
+  if((square < 10) && (square > 0)){
+    width = 432 - 48*(square - 1) - 13;
+    return width;
+  }
+
+  if((square < 30) && (square > 20)){
+    width = 48*(square - 21) + 17 + 18;
+    return width;
+  }
+
+
+
+
+}
+
+function hotelHeightCalculate(square){
+  var height = 1;
+  if((square > 19) && (square < 31)){
+    return height;
+  }
+
+  if(square < 11){
+    height = 450;
+    return height;
+  }
+
+  if((square > 30) && (square < 40)){
+    height = 48*(square - 31) + 17 + 18;
+    return height;
+  }
+  if((square > 10) && (square < 20)){
+    height = 432 - 48*(square - 11) - 13;
+    return height;
+  }
+
+
+}
+
+function hauseWidthCalculate(square){
+  var width = 1;
+  if((square > 9) && (square < 21)){
+    return width;
+  }
+  if((square == 0) || ((square < 40) && (square > 29))){
+    width = 450;
+    return width;
+  }
+
+  if((square < 10) && (square > 0)){
+    width = 414 - 48*(square - 1) - 13;
+    return width;
+  }
+
+  if((square < 30) && (square > 20)){
+    width = 48*(square - 21) + 17;
+    return width;
+  }
+
+
+
+
+}
+
+function hauseHeightCalculate(square){
+  var height = 1;
+  if((square > 19) && (square < 31)){
+    return height;
+  }
+
+  if(square < 11){
+    height = 450;
+    return height;
+  }
+
+  if((square > 30) && (square < 40)){
+    height = 48*(square - 31) + 17;
+    return height;
+  }
+  if((square > 10) && (square < 20)){
+    height = 414 - 48*(square - 11) - 13;
+    return height;
+  }
+
+
+}
+
+function hause2WidthCalculate(square){
+  var width = 1;
+  if((square > 9) && (square < 21)){
+    return width;
+  }
+  if((square == 0) || ((square < 40) && (square > 29))){
+    width = 450;
+    return width;
+  }
+
+  if((square < 10) && (square > 0)){
+    width = 414 - 48*(square - 1) - 13+12;
+    return width;
+  }
+
+  if((square < 30) && (square > 20)){
+    width = 48*(square - 21) + 17+12;
+    return width;
+  }
+
+
+
+
+}
+
+function hause2HeightCalculate(square){
+  var height = 1;
+  if((square > 19) && (square < 31)){
+    return height;
+  }
+
+  if(square < 11){
+    height = 450;
+    return height;
+  }
+
+  if((square > 30) && (square < 40)){
+    height = 48*(square - 31) + 17+12;
+    return height;
+  }
+  if((square > 10) && (square < 20)){
+    height = 414 - 48*(square - 11) - 13+12;
+    return height;
+  }
+
+
+}
+
+function hause3WidthCalculate(square){
+  var width = 1;
+  if((square > 9) && (square < 21)){
+    return width;
+  }
+  if((square == 0) || ((square < 40) && (square > 29))){
+    width = 450;
+    return width;
+  }
+
+  if((square < 10) && (square > 0)){
+    width = 414 - 48*(square - 1) - 13+24;
+    return width;
+  }
+
+  if((square < 30) && (square > 20)){
+    width = 48*(square - 21) + 17+24;
+    return width;
+  }
+
+
+
+
+}
+
+function hause3HeightCalculate(square){
+  var height = 1;
+  if((square > 19) && (square < 31)){
+    return height;
+  }
+
+  if(square < 11){
+    height = 450;
+    return height;
+  }
+
+  if((square > 30) && (square < 40)){
+    height = 48*(square - 31) + 17+24;
+    return height;
+  }
+  if((square > 10) && (square < 20)){
+    height = 414 - 48*(square - 11) - 13+24;
+    return height;
+  }
+
+
+}
+
+function hause4WidthCalculate(square){
+  var width = 1;
+  if((square > 9) && (square < 21)){
+    return width;
+  }
+  if((square == 0) || ((square < 40) && (square > 29))){
+    width = 450;
+    return width;
+  }
+
+  if((square < 10) && (square > 0)){
+    width = 414 - 48*(square - 1) - 13+36;
+    return width;
+  }
+
+  if((square < 30) && (square > 20)){
+    width = 48*(square - 21) + 17+36;
+    return width;
+  }
+
+
+
+
+}
+
+function hause4HeightCalculate(square){
+  var height = 1;
+  if((square > 19) && (square < 31)){
+    return height;
+  }
+
+  if(square < 11){
+    height = 450;
+    return height;
+  }
+
+  if((square > 30) && (square < 40)){
+    height = 48*(square - 31) + 17+36;
+    return height;
+  }
+  if((square > 10) && (square < 20)){
+    height = 414 - 48*(square - 11) - 13+36;
+    return height;
+  }
+
+
+}
 
 //DIANA the actual drawing function, that calls itself -> you have to get things from backend here
 function draw() {
@@ -208,7 +448,17 @@ function draw() {
 
 
 }
+//DIANA give this functions a true value if you want to change the number of hauses of a certain place from backend
+  var updateHauseNumber = true;
+  if (updateHauseNumber == true){
+//DIANA state which is square should be updated form backend
+    var whichHause = 11;
+    //DIANA say the number of hauses 0-4 or 5 for a hotel again form the backend
+    hausesPerProperty[whichHause] = 2;
 
+
+
+  }
 
 
   for (i = 0; i < getNumberOfPlayers(); i++){
@@ -227,10 +477,37 @@ function draw() {
   }
   for (i = 0; i < 40; i++){
     ctx.drawImage(ownedPlace[i], 69 + ownedPlaceWidth[i], 69 + ownedPlaceHeight[i], 17, 17);
+
+    if ((hausesPerProperty[i] > 0) && (hausesPerProperty[i] < 5)){
+      if(hausesPerProperty[i] == 1){
+        ctx.drawImage(hause, 53+hauseWidthCalculate(i), 53+hauseHeightCalculate(i), 12, 12);
+      }
+      if(hausesPerProperty[i] == 2){
+        ctx.drawImage(hause, 53+hauseWidthCalculate(i), 53+hauseHeightCalculate(i), 12, 12);
+        ctx.drawImage(hause, 53+hause2WidthCalculate(i), 53+hause2HeightCalculate(i), 12, 12);
+      }
+      if(hausesPerProperty[i] == 3){
+        ctx.drawImage(hause, 53+hauseWidthCalculate(i), 53+hauseHeightCalculate(i), 12, 12);
+        ctx.drawImage(hause, 53+hause2WidthCalculate(i), 53+hause2HeightCalculate(i), 12, 12);
+        ctx.drawImage(hause, 53+hause3WidthCalculate(i), 53+hause3HeightCalculate(i), 12, 12);
+          
+      
+      }
+      if(hausesPerProperty[i] == 4){
+        ctx.drawImage(hause, 53+hauseWidthCalculate(i), 53+hauseHeightCalculate(i), 12, 12);
+        ctx.drawImage(hause, 53+hause2WidthCalculate(i), 53+hause2HeightCalculate(i), 12, 12);
+        ctx.drawImage(hause, 53+hause3WidthCalculate(i), 53+hause3HeightCalculate(i), 12, 12);
+        ctx.drawImage(hause, 53+hause4WidthCalculate(i), 53+hause4HeightCalculate(i), 12, 12);
+              
+      }
+      
+      
+    }
+      if (hausesPerProperty[i] == 5){
+        ctx.drawImage(hotel, 51+hotelWidthCalculate(i), 51+hotelHeightCalculate(i), 17, 17);
+      }
+
   }
-
-
-
 
 
 
