@@ -47,6 +47,7 @@ def mitigating_circumstances(player):
     global location
     global skip
     global paid_test
+    global dice1, dice2, dice_value
 
 
     m = random.randint(1,10)
@@ -110,15 +111,13 @@ def mitigating_circumstances(player):
         if location[player_location[player]]>0:
             ### roll dice -- pay 10 times the amount thrown
             owner = location[player_location[player]] - 7
-            print("Roll dice again")
-            x= random.randint(1,6)
-            y = random.randint(1,6)
-            print("You have thrown" + str(x) + " "+ str(y) + " ")
+            dice_roll()
+            print("You have thrown" + str(dice1) + " "+ str(dice2) + " ")
             paid_test = 1   # player didnt pay
             initial_money = player_money[player]
-            pay(player, 10*(x+y), 0)
+            pay(player, 10*dice_value, 0)
             if paid_test == 0:
-                player_money[owner] += 10*(x+y)
+                player_money[owner] += 10*dice_value
             else:
                 player_money[owner] += initial_money
         else:
@@ -165,6 +164,7 @@ def deadlines(player):
     global location_price
     global paid_test
     global location
+    global dice1, dice2, dice_value
 
     d = random.randint(1,10)
     if d==1:   #You missed a deadline. Pay k 50.
@@ -219,14 +219,13 @@ def deadlines(player):
         player_location[player] = 6
         if location[6] >0:
             print("Throw dice again! ")
-            x= random.randint(1,6)
-            y = random.randint(1,6)
-            print("You have thrown " + str(x) + " "+ str(y))
+            dice_roll()
+            print("You have thrown " + str(dice1) + " "+ str(dice2))
             paid_test = 1   # player didnt pay
             initial_money = player_money[player]
-            pay(player, 5*(x+y), 0)
+            pay(player, 5*dice_value, 0)
             if paid_test == 0:
-                player_money[location[6]-1] += 50
+                player_money[location[6]-1] += 5 * dice_value
             else:
                  player_money[location[6]-1] += initial_money
 
