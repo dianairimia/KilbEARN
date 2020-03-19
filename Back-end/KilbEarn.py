@@ -10,7 +10,7 @@ def pay(player, amount, optionality):
 
 
     #global variables
-    global player_money, skip, houses_location, location, location_price, no_remaining_player, paid_test
+    global player_money, skip, houses_location, location, no_remaining_player, paid_test
 
 
 
@@ -24,93 +24,17 @@ def pay(player, amount, optionality):
     elif optionality == 0:
 
 
-        #we want to calculate the amount of money a player owns with it's properties...
-        #...to determine if he lost or not, without making him manually have to sell all his properties
-        properties_value = 0
-
-
-        for i in range (40):
-
-
-            #if the player owns a location, we calculate how much he would get for selling everything on it
-            if location[i] == player + 1 or location[i] == player + 7 or location[i] == player + 13:
-
-                #note: when we sell something, we get half(1/2) the money we spent on it
-
-
-                #we calculate how much the houses & hotels are worth
-                if houses_location[i] > 0:
-                    properties_value = properties_value + (location_price[i]*2/5)/2 * houses_location[i]
-                    #the price of a house is locarion_price[i] * 2/5
-                    # the prices of 4 houses + a hotel is location_price[i] * 2
-
-
-                # we calculate how much the locations are worth
-                properties_value = properties_value + location_price[i]/2
-
-
-
         # the player lost if he ran out of money
-        if properties_value < amount:
-            print("YOU LOST!")
-            skip[player] = 2
-            no_remaining_player = no_remaining_player - 1
+        print("YOU LOST!")
+        skip[player] = 2
+        no_remaining_player = no_remaining_player - 1
 
-            #if a player loses, he loses all his locations and houses and hotels
+        #if a player loses, he loses all his locations and houses and hotels
 
-            for i in range(40):
-                if location[i] == player + 1:
-                    houses_location[i] = 0
-                    location[i] = 0
-
-
-
-        #we ask the player what he wants to sell
-        #this is mostly a place-holder for the final version, but it's still good cause...
-        #...except the way the player chooses what he sales, everything is still the same
-        else:
-            while(player_money[player] < amount):
-                answer = input("Do you want o sell a hotel?[y/n]")
-                if answer[0] == 'y':
-                    where = input("From which location do you want to sell it?[insert the number(0-39)]")
-                    where = int(where)
-                    if houses_location[where] != 5 or location[where] != player + 1:
-                        print("You don't own a hotel on that location!!!")
-                    else:
-                        player_money[player] = player_money[player] + location_price[where]
-                        houses_location[where] = 0
-
-                answer = input("Do you want o sell some houses?[y/n]")
-                if answer[0] == 'y':
-                    where = input("From which location do you want to sell them?[insert the number(0-39)]")
-                    where = int(where)
-                    if houses_location[where] == 0 or location[where] != player + 1:
-                        print("You don't own a house on that location!!!")
-                    else:
-                        number_houses = input("How many houses do you want to sell?[insert the number]")
-                        number_houses = int(number_houses)
-                        #for now I'm ignoring that you have to also sell houses from locations...
-                        #...with the same color, I'll get back to this in the nearby future.......
-                        #also ignoring that you maaaaaay insert too many houses, oooops....
-                        if number_houses > houses_location[where]:
-                            print("You inserted too many houses!!!")
-                        else:
-                            player_money[player] = player_money[player] + (location_price[where]*2/5)/2 * number_houses
-                            houses_location[where] = houses_location[where] - number_houses
-
-                answer = input("Do you want o sell a location?[y/n]")
-                if answer[0] == 'y':
-                    where = input("Which location do you want to sell?[insert the number(0-39)]")
-                    where = int(where)
-                    if location[where] != player + 1 or location[where] != player + 7 or location[where] != player + 13:
-                        print("You don't own that location!!!")
-                    else:
-                        player_money[player] = player_money[player] + location_price[where] / 2
-                        location[where] = 0
-
-            #now that the player has money after selling stuff he can pay what he has to pay
-            player_money[player] = player_money[player] - amount
-            paid_test = 0
+        for i in range(40):
+            if location[i] == player + 1:
+                houses_location[i] = 0
+                location[i] = 0
 
 
 
@@ -458,64 +382,19 @@ def check_ownable_locations(checked_location, player):
 
 # function for buying houses or hotels
 #player is from 0-5
-def buy_houses(player):
+def buy_houses(player, checked_location):
 
     global location, houses_location, player_money, location_price, paid_test
 
-
     #buying houses
-    answer = input("Do you want to buy some houses? [y/n]")
-    if answer[0] == 'y':
-        answer1 = input("Where do you want to place the houses? [insert location(0-39)]")
-        answer1 = int(answer1)
 
-        #now let's check if the player actually owns the location
-        while(location[answer1] != player + 1):
-            print("You don't own that location or this is a server!")
-            answer1 = input("Where do you want to place the houses? [insert location(0-39)]")
-            answer1 = int(answer1)
-
-
-        answer2 = input("How many houses do you want to buy? [You can have max 4 houses there!]")
-        answer2 = int(answer2)
-
-        # now let's check if those houses can actually be placed there
-        while (houses_location[answer1] + answer2 >4):
-            answer2 = input("How many houses do you want to buy? [You can have max 4 houses there!]")
-            answer2 = int(answer2)
-
-
+    #check if the player actually owns the location or can still place a house
+    if location[checked_location] == player + 1 and houses_location[checked_location] < 6:
         paid_test = 1
-        pay(player, answer2 * location_price[answer1] * 2/5, 1)
+        pay(player, location_price[checked_location] * 2/5, 1)
         if(paid_test == 0):
-            houses_location[answer1] = houses_location[answer1] + answer2
-        else:
-            print("You don't have enough money!!!")
+            houses_location[checked_location] = houses_location[checked_location] + 1
 
-
-
-        #now let's see if the player wants to buy a hotel...
-        answer = input("Do you want to buy a hotel? [y/n]")
-        if answer[0] == 'y':
-            answer1 = input("Where do you want to buy the hotel? [insert location(0-39)]")
-            answer1 = int(answer1)
-
-            # now let's check if the player actually owns the location
-            while (location[answer1] != player + 1):
-                print("You don't own that location!")
-                answer1 = input("Where do you want to place the hotel? [insert location(0-39)]")
-                answer1 = int(answer1)
-
-            # now let's check if the hotel can actually be placed there
-            if(houses_location[answer1] != 4 or houses_location[answer1] == 5):
-                print("You can't place a hotel here!!!")
-            else:
-                paid_test = 1
-                pay(player, location_price[answer1] * 2/5, 1)
-                if (paid_test == 0):
-                    houses_location[answer1] = 5
-                else:
-                    print("You don't have enough money!!!")
 
 
 
@@ -792,7 +671,6 @@ def main():
                 #we check why the player is skiped, like if he is in tutor's room or he lost
                 checkskip(player_turn)
             else:
-                buy_houses(player_turn)
                 #now the dice roll for the players
                 dice_roll()
                 print("You rolled " + str(dice1) + " with " + str(dice2))
