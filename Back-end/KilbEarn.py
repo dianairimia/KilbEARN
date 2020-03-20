@@ -48,6 +48,7 @@ def mitigating_circumstances(player):
     global skip
     global paid_test
     global dice1, dice2, dice_value
+    global no_players
 
 
     m = random.randint(1,10)
@@ -68,7 +69,7 @@ def mitigating_circumstances(player):
 
     if m ==3: # You have been elected the chair of the tutorials for the rest of the semester. Collect k 25 from each player.
         print("You have been elected the chair of the tutorials for the rest of the semester. Collect k 25 from each player.")
-        for i in range(no_player):
+        for i in range(no_players):
             if skip[i] != 2 and i != player:
                 paid_test = 1   # player didnt pay
                 initial_money = player_money[i]
@@ -165,6 +166,7 @@ def deadlines(player):
     global paid_test
     global location
     global dice1, dice2, dice_value
+    global no_players
 
     d = random.randint(1,10)
     if d==1:   #You missed a deadline. Pay k 50.
@@ -233,7 +235,7 @@ def deadlines(player):
 
     if d==8: #You need to give your final presentation. Pay each player k 25.
         print("You need to give your final presentation. Pay each player k 25.")
-        for i in range(0, no_player):
+        for i in range(0, no_players):
             if player != i and skip[i] != 2:
                 paid_test = 1   # player didnt pay
                 initial_money = player_money[player]
@@ -501,6 +503,9 @@ def dice_roll():
     dice2 = random.randint(1, 6)
     dice_value = dice1 + dice2
 
+
+
+def no_player():
 
 
 def main():
