@@ -1,0 +1,109 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+    shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>No room</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static "css/loginregister.css" %}"/>
+    <script src="{% static 'scripts/noroom.js' %}"></script>
+  </head>
+
+  <body class="text-center">
+<form class="form-signin" method=POST onsubmit="javascript:added()">
+      {% csrf_token %}
+      <div class="container">
+        <div class="row top-buffer">
+          <div class="col">
+          <a class="btn btn-secondary btn-sm" href="profile.html" role="button">Profile</a>
+          </div>
+          <div class="col-6">
+          <a class="btn btn-secondary btn-sm" href="settings.html" role="button">Settings</a>
+          </div>
+        </div>
+      </div>
+      <br>
+
+    <h1 class="h3 mb-3 font-weight-normal">Add Players</h1>
+    <label for="inputName" class="sr-only"></label>
+    <input type="name" name="Name" id="inputName" class="form-control"
+    placeholder="Name" autofocus>
+    <br>
+    <h3 class="h3 mb-3 font-weight-normal">Select Your Icon</h3>
+
+    <div class="container">
+      <div class="row top-buffer">
+        <label class="test">
+        <input type="radio" name="icon" value="images/c++squared.png">
+        <img src="{% static 'images/c++squared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="images/Cshsquared.png">
+        <img src="{% static 'images/Cshsquared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="images/haskellsquared.png">
+        <img src="{% static 'images/haskellsquared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="images/jssquared.png" >
+        <img src="{% static 'images/jssquared.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="{% static 'images/rubysquared.png' %}" >
+        <img src="{% static 'images/rubysquared.png' %}"width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="{% static 'images/squaredpython.png' %}" >
+        <img src="{% static 'images/squaredpython.png' %}" width="40" height="40" />
+        </label>
+
+        <label class="test">
+        <input type="radio" name="icon" value="{% static 'images/swiftsquared.png' %}" >
+        <img src="{% static 'images/swiftsquared.png' %}" width="40" height="40" />
+        </label>
+        <input type="submit" class="btn btn-primary btn-lg btn-block" value='Add Player'>
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+
+      <br>
+
+      <div class="row top-buffer">
+      <input type="submit" name="sendNumberPlayer" class="btn btn-primary btn-lg btn-block" value='Save & Continue'>
+</form>
+
+      <!--<input type="submit" class="btn btn-primary btn-lg btn-block" value='SAVE & CONTINUE'>-->
+      </div>
+
+      <div class="row top-buffer">
+        <a class="btn btn-secondary btn-lg btn-block" href="play.html" role="button">Back</a>
+      </div>
+
+    </div>
+
+  </body>
+</html>

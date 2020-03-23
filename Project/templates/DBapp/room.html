@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>K-Connect</title>
+	<link rel="stylesheet" href="{% static 'css/kconnect.css' %}"/>
+</head>
+ <body>
+	<h1 class="heading">KilbEarn Connect</h1>
+	<p class="text">Find someone to play with!
+    <textarea id="chat-log" cols="150" rows="20"></textarea><br>
+    <input class="submissionfield" id="chat-message-input" style="font-size : 20px;" type="text" size="90"><br>
+    <input class="btn" name="sent" id="chat-message-submit" type="button" value="Send" style="font-size : 40px; width: 150px; height: 50px;">
+	<input class="btn2" onclick="location.href = '../mainmenu.html';" type="button" value="Back" style="font-size : 40px; width: 150px; height: 50px;">
+    {{ room_name|json_script:"room-name" }}
+    <script>
+        const roomName = JSON.parse(document.getElementById('room-name').textContent);
+        var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        var UN1 = "";
+        var UN2 = "";
+        if (isChrome) {
+          UN1 = "{{uname}}";
+        } else {
+          UN2 = "{{uname}}"
+        }
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            if (isChrome){
+              chatSocket.send(JSON.stringify({'message': " "+UN1+") "+message}));
+              messageInputDom.value = '';
+            } else {
+              chatSocket.send(JSON.stringify({'message': " "+UN2+") "+message}));
+              messageInputDom.value = '';
+            }
+
+        };
+    </script>
+</body>
+</html>
