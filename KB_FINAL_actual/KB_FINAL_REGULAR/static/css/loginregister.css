@@ -117,7 +117,7 @@ button.selected{
         position: fixed;
         left: 240px;
         top: 230px;
-        z-index:1;
+        /* z-index:1; */
 }
 .btn-property{
   position: fixed;
@@ -382,7 +382,7 @@ background: #232323;
 	top:0px;
 	left:0px;
 	z-index:10000;
-	/* background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */ */
+	/* background-image:url(tp.png); /* required by MSIE to prevent actions on lower z-index elements */
 }
 
 #alertBox {
@@ -412,7 +412,7 @@ background: #232323;
 #alertBox p {
 	font:0.7em Courier,arial;
   font-size: 20px;
-	height:50px;
+	height:60px;
   width: 200px;
 	padding-left:5px;
 	margin-left:55px;
@@ -515,7 +515,7 @@ background: #232323;
   cursor: pointer;
   text-indent: -999999px;
   height:40px;
-  width: 40px; 
+  width: 40px;
   background-color: transparent !important;
   background-image: url("play.png");
   background-repeat: no-repeat;
@@ -523,7 +523,7 @@ background: #232323;
   background-size:20px;
   position: fixed;
   left: 85px;
-  top: 26px; 
+  top: 26px;
 }
 .play {
   background-image: url("play.png");
@@ -1258,4 +1258,12 @@ p {
   margin-top: -1px;
   background-color: #DCDCDC !important;
   margin: 1px 0;
+}
+
+
+.test {
+  position: fixed;
+  /* top: 400px; */
+  left: 350px;
+
 }

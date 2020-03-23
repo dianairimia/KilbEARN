@@ -18,7 +18,7 @@
     <!-- Custom styles for this template -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" href="{% static 'css/remodal.css' %}"/>
-    
+
 	<link rel="stylesheet" href="{% static 'css/remodal-default-theme.css' %}"/>
 
 	<link rel="stylesheet" href="{% static 'css/loginregister.css' %}"/>
@@ -52,7 +52,7 @@
 
       <div id="player-container">
         <div id="play-pause" class="play">Play</div>
-        <a class="btn-quit" onclick="alert('Are you sure you want to end the game?');" type="button"></a>
+        <a class="btn-quit" onclick="alert('Are you sure you want to quit the game?');" type="button"></a>
       </div>
 
       <nav role="navigation">
@@ -64,7 +64,6 @@
               <ul id="menu">
                   <a href="profile.html"><li>Profile</li></a>
                   <a href="settings.html"><li>Settings</li></a>
-                  <a href="#"><li>About</li></a>
                   <a href="instructions.html"><li>Instructions</li></a>
                   <a href="https://images.app.goo.gl/pjh7DtfLYrhPts5y9" target="_blank"><li>ARGHHH</li></a>
                   <img src="{% static 'images/kilburnlogo.png' %}" height="200" width="auto">
@@ -150,6 +149,7 @@
         </div>
 
         <button type="button" class="btn btn-secondary btn-lg btn-dice btn-group" id="roll-button">Roll Dice</button>
+        <button type="button" class="btn btn-secondary btn-done btn-lg btn-group">DONE</button>
       </div>
 
       <div class="outsideWrapper">
@@ -760,10 +760,13 @@
 
 </div>
 
+  <a class="test" href="#modal" type="button">Buy Property</a><br>
+
         <div class="remodal-bg">
-          <a class="test" href="#modal">Modal</a><br>
+          <!-- <a class="test" href="#modal" type="button">Buy Property</a><br> -->
           <br><br>
         </div>
+
 
         <div class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
           <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
@@ -780,7 +783,7 @@
         </div>
 
         <div class="tabletest">
-		
+
         <table id="results">
         <tr>
           <td><img src="{% static 'images/squaredpython.png' %}" width="40" height="40"></td>

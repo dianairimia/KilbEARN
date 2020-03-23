@@ -1,1 +1,1 @@
-{"players": [{"name": "A1", "icon": "images/c++squared.png", "money": 500, "locations": []}, {"name": "A2", "icon": "images/Cshsquared.png", "money": 500, "locations": []}]}
+{"players": [{"name": "p1", "icon": "images/Cshsquared.png", "money": 500, "locations": []}, {"name": "p2", "icon": "images/haskellsquared.png", "money": 500, "locations": []}, {"name": "p3", "icon": "images/jssquared.png", "money": 500, "locations": []}, {"name": "p4", "icon": "/static/images/rubysquared.png", "money": 500, "locations": []}]}

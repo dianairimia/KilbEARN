@@ -91,9 +91,10 @@ html.remodal-is-locked {
   /* Disable Anti-FOUC */
   display: inline-block;
 }
-/* 
-.test {
-  position: fixed;
-  top: 100px;
-  left: 200px;
+
+/* .test {
+  position: relative;
+  top: 0px;
+  left: 20px;
+
 } */
